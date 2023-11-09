@@ -1,0 +1,10 @@
+<div class="dropdown">
+  <button class="btn btn-primary dropdown-toggle" (click)="toggleDropdown()">
+    Select Symbol
+  </button>
+  <div *ngIf="isDropdownOpen" class="dropdown-menu">
+    <button *ngFor="let symbol of symbols" class="dropdown-item">
+      {{ symbol }}
+    </button>
+  </div>
+</div>
