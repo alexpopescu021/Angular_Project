@@ -1,25 +1,25 @@
 <div style="display: flex; justify-content: center; align-items: center">
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <!-- Email input -->
+    <!-- Username input -->
     <div class="form-outline mb-4">
       <input
-        type="email"
-        id="email"
+        type="Username"
+        id="Username"
         class="form-control"
-        formControlName="email"
+        formControlName="Username"
       />
-      <label class="form-label" for="email">Email address</label>
+      <label class="form-label" for="Username">Username</label>
     </div>
 
     <!-- Password input -->
     <div class="form-outline mb-4">
       <input
-        type="password"
-        id="password"
+        type="Password"
+        id="Password"
         class="form-control"
-        formControlName="password"
+        formControlName="Password"
       />
-      <label class="form-label" for="password">Password</label>
+      <label class="form-label" for="Password">Password</label>
     </div>
 
     <!-- 2 column grid layout for inline styling -->

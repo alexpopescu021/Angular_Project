@@ -2,8 +2,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
@@ -20,11 +20,12 @@ import { UserComponent } from './user/user.component';
     NavbarComponent,
     UserComponent,
     UserLoginComponent,
-    TransactionsComponent,
     DropdownComponent,
+    TransactionsComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     RouterModule,
     AppRoutingModule,
     ReactiveFormsModule,
@@ -32,7 +33,6 @@ import { UserComponent } from './user/user.component';
     BrowserModule,
     MaterialModule,
     FormsModule,
-    NgbModule,
   ],
   providers: [TransactionService],
   bootstrap: [AppComponent],

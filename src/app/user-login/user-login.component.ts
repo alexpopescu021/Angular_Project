@@ -1,22 +1,31 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { LoginService } from '../services/login.service';
 @Component({
   selector: 'app-user-login',
   templateUrl: './user-login.component.html',
   styleUrls: ['./user-login.component.css'],
 })
 export class UserLoginComponent {
-  loginForm = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl(''),
-  });
+  loginForm!: FormGroup;
 
-  constructor() {}
+  constructor(public loginService: LoginService, private fb: FormBuilder) {}
 
-  onSubmit(): void {
-    console.warn(
-      'you entered ',
-      this.loginForm.value.email + ' ' + this.loginForm.value.password
-    );
+  ngOnInit(): void {
+    this.loginForm = this.fb.group({
+      Username: [''],
+      Password: [''],
+    });
+  }
+  onSubmit() {
+    var data = this.loginService.login(this.loginForm.value).subscribe({
+      next: (res) => {
+        alert(res.message);
+      },
+      error: (err) => {
+        alert(err.error.message);
+      },
+    });
+    return data;
   }
 }
