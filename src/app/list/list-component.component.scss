@@ -1,0 +1,25 @@
+.rectangle {
+  border: 1px solid #333;
+  padding: 10px;
+  margin: 10px;
+  width: 200px;
+  color: white;
+  background-color: #333;
+  overflow-y: auto;
+  height: 150px; /* Fixed height, adjust as needed */
+}
+
+.item-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item {
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+label {
+  color: white;
+}

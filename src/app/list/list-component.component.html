@@ -1,0 +1,8 @@
+<div class="rectangle">
+  <label>{{ title }}</label>
+  <ul class="item-list">
+    <li class="item" *ngFor="let item of items" (click)="itemClicked(item)">
+      {{ item }}
+    </li>
+  </ul>
+</div>

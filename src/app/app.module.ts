@@ -6,13 +6,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DropdownComponent } from './dropdown/dropdown.component';
+import { ListComponent } from './list/list-component.component';
 import { MaterialModule } from './material.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { TransactionService } from './services/transaction.service';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { UserComponent } from './user/user.component';
+import { SupportedCurrenciesComponent } from './supported-currencies/supported-currencies.component';
 
 @NgModule({
   declarations: [
@@ -20,8 +21,10 @@ import { UserComponent } from './user/user.component';
     NavbarComponent,
     UserComponent,
     UserLoginComponent,
-    DropdownComponent,
+    //DropdownComponent,
     TransactionsComponent,
+    ListComponent,
+    SupportedCurrenciesComponent,
   ],
   imports: [
     BrowserModule,
