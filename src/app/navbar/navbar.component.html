@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand active" routerLink="/dashboard">Navbar</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -14,18 +14,23 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="transactions"
+        <li class="nav-item" routerLinkActive="active-link">
+          <a
+            class="nav-link"
+            aria-current="page"
+            *ngIf="isAuthenticated"
+            routerLink="transactions"
             >Transactions</a
           >
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="supported">Link</a>
+        <li class="nav-item" routerLinkActive="active-link">
+          <a class="nav-link" routerLink="/supported" *ngIf="isAuthenticated"
+            >Currencies</a
+          >
         </li>
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
-            href="#"
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
@@ -33,14 +38,29 @@
             Dropdown
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" routerLink="user">Users</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li>
+              <a
+                class="dropdown-item"
+                routerLink="/"
+                routerLinkActive="active-link"
+                >Another action</a
+              >
+            </li>
             <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li>
+              <a
+                class="dropdown-item"
+                routerLink="/"
+                routerLinkActive="active-link"
+                >Something else here</a
+              >
+            </li>
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
+          <a class="nav-link disabled" routerLinkActive="active-link"
+            >Disabled</a
+          >
         </li>
       </ul>
       <form class="d-flex" role="search">
@@ -52,6 +72,19 @@
         />
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item" routerLinkActive="active-link">
+          <a class="nav-link" routerLink="/user-list">Users</a>
+        </li>
+        <li routerLinkActive="active-link">
+          <a class="nav-link" routerLink="/auth" *ngIf="!isAuthenticated"
+            >Login</a
+          >
+        </li>
+        <li routerLinkActive="active-link">
+          <a class="nav-link" *ngIf="isAuthenticated">Logout</a>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>

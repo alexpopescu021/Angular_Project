@@ -1,0 +1,23 @@
+<div class="grid-container">
+  <h1 class="mat-h1">Dashboard</h1>
+  <mat-grid-list cols="4" rowHeight="350px">
+    <mat-grid-tile
+      [colspan]="(cardLayout | async)?.chart?.cols"
+      [rowspan]="(cardLayout | async)?.chart?.rows"
+    >
+      <mat-card title="Monthly Revenue">
+        <mat-card-title>Test</mat-card-title>
+        <app-profit-chart></app-profit-chart>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile
+      [colspan]="(cardLayout | async)?.chart?.cols"
+      [rowspan]="(cardLayout | async)?.chart?.rows"
+    >
+      <mat-card title="Monthly Revenue">
+        <app-profit-chart></app-profit-chart>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

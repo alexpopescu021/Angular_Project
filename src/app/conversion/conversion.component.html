@@ -1,0 +1,34 @@
+<nav>
+  <ul>
+    <li><a href="new-transaction">Transaction</a></li>
+    <li>Conversion</li>
+  </ul>
+</nav>
+
+<form>
+  <div class="input-container">
+    <label for="fromCurrency">From:</label>
+    <mat-select [(ngModel)]="fromCurrency" id="fromCurrency">
+      <mat-option *ngFor="let currency of currencies" [value]="currency">
+        {{ currency }}
+      </mat-option>
+    </mat-select>
+  </div>
+
+  <!-- <div class="swap-icon" (click)="swapCurrencies()">
+    <mat-icon>swap_horiz</mat-icon>
+  </div> -->
+
+  <div class="input-container">
+    <label for="toCurrency">To:</label>
+    <mat-select [(ngModel)]="toCurrency" id="toCurrency">
+      <mat-option *ngFor="let currency of currencies" [value]="currency">
+        {{ currency }}
+      </mat-option>
+    </mat-select>
+  </div>
+
+  <!-- Add other input fields for conversion as needed -->
+
+  <button type="button" (click)="performConversion()">Convert</button>
+</form>

@@ -1,0 +1,25 @@
+@import "@angular/material/theming";
+
+@import "./assets/styles/app-color-palette";
+@import "./assets/styles/app-theme";
+$theme: mat-dark-theme($app-primary, $app-accent, $app-warn);
+// apply the dark theme
+@include angular-material-theme($theme);
+
+.chartContainer canvas {
+  max-height: 250px;
+  width: auto;
+  color: aqua !important;
+}
+
+.chartContainer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.mat-card {
+  background: whitesmoke !important;
+}

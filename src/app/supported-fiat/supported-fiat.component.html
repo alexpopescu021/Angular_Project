@@ -1,13 +1,13 @@
 <div class="container">
   <app-list
     [items]="leftList"
-    title="All Currencies"
+    title="All Fiat Currencies"
     (itemClickedEvent)="moveItem($event, 'right')"
   ></app-list>
   <button class="save-button" (click)="saveData()">Save</button>
   <app-list
     [items]="rightList"
-    title="Supported Currencies"
+    title="Supported Fiat Currencies"
     (itemClickedEvent)="moveItem($event, 'left')"
   ></app-list>
 </div>

@@ -1,0 +1,20 @@
+<nav>
+  <ul>
+    <li>Transaction</li>
+    <li><a href="conversion">Conversion</a></li>
+  </ul>
+</nav>
+
+<form>
+  <label for="transactionType">Transaction Type:</label>
+  <select id="transactionType">
+    <!-- Add options for transaction type dropdown -->
+  </select>
+
+  <label for="amount">Amount:</label>
+  <input type="text" id="amount" />
+
+  <!-- Add other input fields as needed -->
+
+  <button type="button" (click)="sendTransaction()">Send</button>
+</form>

@@ -1,0 +1,34 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <!-- Username Column -->
+  <ng-container matColumnDef="username">
+    <th mat-header-cell *matHeaderCellDef>Username</th>
+    <td mat-cell *matCellDef="let user">{{ user.username }}</td>
+  </ng-container>
+
+  <!-- ReferenceId Column -->
+  <ng-container matColumnDef="referenceId">
+    <th mat-header-cell *matHeaderCellDef>ReferenceId</th>
+    <td mat-cell *matCellDef="let user">{{ user.referenceId }}</td>
+  </ng-container>
+
+  <!-- Active Since Column -->
+  <ng-container matColumnDef="activeSince">
+    <th mat-header-cell *matHeaderCellDef>Active Since</th>
+    <td mat-cell *matCellDef="let user">{{ user.activeSince }}</td>
+  </ng-container>
+
+  <!-- Activation Column -->
+  <ng-container matColumnDef="activation">
+    <th mat-header-cell *matHeaderCellDef>Activation</th>
+    <td mat-cell *matCellDef="let user">
+      <button mat-icon-button (click)="toggleActivation(user)">
+        <mat-icon>{{
+          user.activation === "activate" ? "check_circle" : "cancel"
+        }}</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

@@ -1,0 +1,64 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.mat-select-arrow {
+  color: black !important;
+}
+
+form {
+  max-width: 900px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fff; /* Light background color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle pop */
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.input-container {
+  margin-bottom: 16px;
+}
+
+.swap-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+/* Styles for the swap icon */
+mat-icon {
+  font-size: 24px;
+  color: #666; /* Adjust color as needed */
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  align-self: flex-end; /* Align button to the right */
+  background-color: #2196f3; /* Blue color for the "Convert" button */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 16px; /* Add margin between the form and the button */
+}
+
+button:hover {
+  background-color: #0b7dda; /* Darker blue color on hover */
+}
+
+:host ::ng-deep .mat-select-value {
+  color: black !important;
+}

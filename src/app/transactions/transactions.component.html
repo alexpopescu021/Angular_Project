@@ -1,8 +1,10 @@
-<table
-  mat-table
-  [dataSource]="TransactionsList"
-  class="mat-elevation-z8 demo-table"
->
+<div class="new-transaction-button">
+  <a mat-raised-button color="primary" href="new-transaction"
+    >New Transaction</a
+  >
+</div>
+
+<table mat-table [dataSource]="TransactionsList" class="mat-elevation-z8">
   <ng-container
     *ngFor="let column of columns"
     [matColumnDef]="column!.columnDef"

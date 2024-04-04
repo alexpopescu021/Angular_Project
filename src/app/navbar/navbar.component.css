@@ -1,0 +1,6 @@
+.active-link {
+  /* Add your styling for the active list item here */
+  background-color: #343a40; /* Dark grey background color */
+  border-radius: 8px; /* Rounded edges */
+  color: #fff; /* Example text color */
+}

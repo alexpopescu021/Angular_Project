@@ -4,10 +4,10 @@ import { SupportedService } from '../services/supported.service';
 
 @Component({
   selector: 'app-supported',
-  templateUrl: './supported-currencies.component.html',
-  styleUrls: ['./supported-currencies.component.scss'],
+  templateUrl: './supported-fiat.component.html',
+  styleUrls: ['./supported-fiat.component.scss'],
 })
-export class SupportedCurrenciesComponent implements OnInit {
+export class SupportedFiatComponent implements OnInit {
   /**
    *
    */
@@ -17,8 +17,10 @@ export class SupportedCurrenciesComponent implements OnInit {
   rightList: any[] = [];
 
   ngOnInit(): void {
-    this.supportedService.loadAllFiat().subscribe((data: string[]) => {
-      this.leftList.push(...data);
+    this.supportedService.getAllFiat().subscribe((data) => {
+      Object.entries(data).forEach(([key, value]) => {
+        this.leftList.push(`${key}: ${value}`);
+      });
       this.leftList.sort();
     });
   }
