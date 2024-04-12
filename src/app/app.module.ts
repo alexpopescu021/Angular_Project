@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgChartsModule } from 'ng2-charts';
 import { LoadingSpinnerComponent } from 'src/shared/loading-spinner.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -22,7 +21,6 @@ import { TransactionService } from './services/transaction.service';
 import { SupportedFiatComponent } from './supported-fiat/supported-fiat.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { UserListComponent } from './user-list/user-list.component';
-import { UserLoginComponent } from './user-login/user-login.component';
 import { UserComponent } from './user/user.component';
 
 @NgModule({
@@ -30,7 +28,6 @@ import { UserComponent } from './user/user.component';
     AppComponent,
     NavbarComponent,
     UserComponent,
-    UserLoginComponent,
     TransactionsComponent,
     ListComponent,
     SupportedFiatComponent,
@@ -52,7 +49,6 @@ import { UserComponent } from './user/user.component';
     HttpClientModule,
     BrowserModule,
     MaterialModule,
-    NgbModule,
     FormsModule,
     LayoutModule,
   ],

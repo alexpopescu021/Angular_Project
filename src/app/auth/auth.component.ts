@@ -51,8 +51,7 @@ export class AuthComponent implements OnInit {
           return throwError(() => new Error(error));
         })
       )
-      .subscribe((resData) => {
-        console.log(resData);
+      .subscribe(() => {
         this.isLoading = false;
 
         this.router.navigate(['/transactions']);

@@ -1,10 +1,5 @@
 @import "@angular/material/theming";
-
-@import "./assets/styles/app-color-palette";
-@import "./assets/styles/app-theme";
-$theme: mat-dark-theme($app-primary, $app-accent, $app-warn);
-// apply the dark theme
-@include angular-material-theme($theme);
+@import "assets/css/nucleo-icons.css";
 
 .chartContainer canvas {
   max-height: 250px;

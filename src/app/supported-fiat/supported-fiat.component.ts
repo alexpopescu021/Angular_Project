@@ -24,9 +24,9 @@ export class SupportedFiatComponent implements OnInit {
       this.leftList.sort();
     });
   }
+
   saveData() {
-    this.supportedService.saveSupported(this.rightList);
-    debugger;
+    this.supportedService.saveSupported(this.rightList).subscribe();
   }
 
   moveItem(item: string, direction: 'left' | 'right') {

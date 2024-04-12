@@ -7,10 +7,8 @@ import { NewTransactionComponent } from './new-transaction/new-transaction.compo
 import { SupportedFiatComponent } from './supported-fiat/supported-fiat.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { UserListComponent } from './user-list/user-list.component';
-import { UserLoginComponent } from './user-login/user-login.component';
 
 const routes: Routes = [
-  { path: 'user', component: UserLoginComponent },
   { path: 'transactions', component: TransactionsComponent },
   { path: 'supported', component: SupportedFiatComponent },
   { path: 'dashboard', component: DashComponent },

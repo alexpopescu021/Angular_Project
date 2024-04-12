@@ -14,3 +14,8 @@
   margin-top: 16px; /* Add spacing between the table and the button */
   margin-left: 73%; /* Push the button to the right */
 }
+
+/* Adjust background and text color for table cells */
+.mat-cell, .mat-header-cell {
+  color: white;
+}

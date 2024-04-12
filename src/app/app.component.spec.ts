@@ -2,12 +2,11 @@ import { TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { UserLoginComponent } from './user-login/user-login.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AppComponent, NavbarComponent, UserLoginComponent],
+      declarations: [AppComponent, NavbarComponent],
       imports: [ReactiveFormsModule],
     }).compileComponents();
   });

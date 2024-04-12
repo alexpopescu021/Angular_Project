@@ -14,7 +14,7 @@ export class SupportedService {
     return this.http.get<any>(`${this.baseApiUrl}/Admin/getfiat`);
   }
 
-  saveSupported(data: string[]) {
+  saveSupported(data: string[]): Observable<any> {
     return this.http.post<any>(`${this.baseApiUrl}/Admin/addcurr`, data).pipe(
       catchError((error) => {
         console.error('HTTP Error:', error);

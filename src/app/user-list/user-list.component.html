@@ -21,10 +21,22 @@
   <ng-container matColumnDef="activation">
     <th mat-header-cell *matHeaderCellDef>Activation</th>
     <td mat-cell *matCellDef="let user">
-      <button mat-icon-button (click)="toggleActivation(user)">
-        <mat-icon>{{
-          user.activation === "activate" ? "check_circle" : "cancel"
-        }}</mat-icon>
+      <button
+        type="button"
+        class="btn btn-sm btn-icon"
+        [ngClass]="{
+          'btn-success': user.activation === 'activate',
+          'btn-danger': user.activation !== 'activate'
+        }"
+        (click)="toggleActivation(user)"
+      >
+        <i
+          class="tim-icons"
+          [ngClass]="{
+            'icon-check-2': user.activation === 'activate',
+            'icon-simple-remove': user.activation !== 'activate'
+          }"
+        ></i>
       </button>
     </td>
   </ng-container>
