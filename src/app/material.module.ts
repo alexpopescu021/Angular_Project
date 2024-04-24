@@ -69,6 +69,7 @@ import { MatTreeModule } from '@angular/material/tree';
     MatGridListModule,
     MatCardModule,
     MatMenuModule,
+    MatSnackBarModule,
     MatIconModule,
     MatButtonModule,
     MatIconModule,

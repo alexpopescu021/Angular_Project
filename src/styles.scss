@@ -15,6 +15,12 @@
   justify-content: center;
 }
 
+.error-snackbar,
+.success-snackbar {
+  position: absolute;
+  top: 60px;
+}
+
 .mat-card {
   background: whitesmoke !important;
 }
