@@ -14,7 +14,15 @@ export class SupportedService {
     return this.http.get<any>(`${this.baseApiUrl}/Admin/getfiat`);
   }
 
-  saveSupported(data: string[]): Observable<any> {
+  getAllCrypto(): Observable<any> {
+    return this.http.get<any>(`${this.baseApiUrl}/Admin/getcrypto`);
+  }
+
+  saveSupported(currencies: string[], currencyType: string): Observable<any> {
+    const data = {
+      currencies: currencies,
+      currencyType: currencyType,
+    };
     return this.http.post<any>(`${this.baseApiUrl}/Admin/addcurr`, data).pipe(
       catchError((error) => {
         console.error('HTTP Error:', error);

@@ -1,40 +1,46 @@
 // app.component.ts
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { FilterItemsPipe } from '../pipes/filterItems/filter-items.pipe';
 import { CurrencyService } from '../services/currency.service';
 import { SnackbarService } from '../services/snackbar.service';
 import { SupportedService } from '../services/supported.service';
 
 @Component({
   selector: 'app-supported',
-  templateUrl: './supported-fiat.component.html',
-  styleUrls: ['./supported-fiat.component.scss'],
+  templateUrl: './supported-crypto.component.html',
+  styleUrls: ['./supported-crypto.component.scss'],
 })
-export class SupportedFiatComponent implements OnInit {
+export class SupportedCryptoComponent implements OnInit {
   /**
    *
    */
   constructor(
     private supportedService: SupportedService,
     private currenciesService: CurrencyService,
-    private snackbarService: SnackbarService
+    private snackbarService: SnackbarService,
+    private filterPipe: FilterItemsPipe,
+    private cdr: ChangeDetectorRef
   ) {}
   leftList: any[] = [];
+  filteredLeftList: any[] = []; // Array to hold the filtered items
+  searchText: string = ''; // Input field value
 
   rightList: any[] = [];
 
   ngOnInit(): void {
-    this.loadFiatContainer();
+    this.loadCryptoContainer();
   }
 
-  public loadFiatContainer() {
-    this.supportedService.getAllFiat().subscribe((data) => {
+  public loadCryptoContainer() {
+    this.supportedService.getAllCrypto().subscribe((data) => {
       Object.entries(data).forEach(([key, value]) => {
         this.leftList.push(`${key}: ${value}`);
       });
       this.leftList.sort();
+      this.filteredLeftList = this.leftList; // Initially, both lists are the same
     });
 
-    this.currenciesService.getSupportedFiat().subscribe((data) => {
+    this.currenciesService.getSupportedCrypto().subscribe((data) => {
       Object.entries(data).forEach(([, value]) => {
         const currencyValue = value as { currencyCode: string };
         if (currencyValue.currencyCode) {
@@ -45,8 +51,17 @@ export class SupportedFiatComponent implements OnInit {
     });
   }
 
+  applyFilter() {
+    this.filteredLeftList = this.filterPipe.transform(
+      this.leftList,
+      this.searchText
+    );
+    // Trigger change detection
+    this.cdr.detectChanges();
+  }
+
   saveData() {
-    this.supportedService.saveSupported(this.rightList, 'fiat').subscribe({
+    this.supportedService.saveSupported(this.rightList, 'crypto').subscribe({
       next: () => {
         console.log('Data saved successfully');
         // Display success snackbar

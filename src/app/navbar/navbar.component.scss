@@ -4,3 +4,7 @@
   border-radius: 8px; /* Rounded edges */
   color: #fff; /* Example text color */
 }
+
+.btn.dropdown-toggle[data-toggle=dropdown]{
+  margin-bottom: 0 !important;
+}

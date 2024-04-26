@@ -5,7 +5,7 @@ import { LoginService } from '../services/login.service';
 @Component({
   selector: 'navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css'],
+  styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   isAuthenticated = false;

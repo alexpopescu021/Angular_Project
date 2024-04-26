@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgChartsModule } from 'ng2-charts';
 import { LoadingSpinnerComponent } from 'src/shared/loading-spinner.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -17,7 +18,9 @@ import { ListComponent } from './list/list-component.component';
 import { MaterialModule } from './material.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NewTransactionComponent } from './new-transaction/new-transaction.component';
+import { FilterItemsPipe } from './pipes/filterItems/filter-items.pipe';
 import { TransactionService } from './services/transaction.service';
+import { SupportedCryptoComponent } from './supported-crypto/supported-crypto.component';
 import { SupportedFiatComponent } from './supported-fiat/supported-fiat.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { UserListComponent } from './user-list/user-list.component';
@@ -31,6 +34,7 @@ import { UserComponent } from './user/user.component';
     TransactionsComponent,
     ListComponent,
     SupportedFiatComponent,
+    SupportedCryptoComponent,
     DashComponent,
     ProfitChartComponent,
     UserListComponent,
@@ -41,6 +45,7 @@ import { UserComponent } from './user/user.component';
   ],
   imports: [
     BrowserModule,
+    NgbDropdownModule,
     BrowserAnimationsModule,
     RouterModule,
     NgChartsModule,
@@ -51,8 +56,9 @@ import { UserComponent } from './user/user.component';
     MaterialModule,
     FormsModule,
     LayoutModule,
+    NgbModule,
   ],
-  providers: [TransactionService],
+  providers: [TransactionService, FilterItemsPipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

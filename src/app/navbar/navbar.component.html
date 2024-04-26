@@ -1,62 +1,44 @@
-<nav class="navbar navbar-expand-lg bg-primary">
+<nav class="navbar navbar-expand-lg bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand active" routerLink="/dashboard">Navbar</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item" routerLinkActive="active-link">
-          <a
-            class="nav-link"
-            aria-current="page"
-            *ngIf="isAuthenticated"
-            routerLink="transactions"
-            >Transactions</a
-          >
-        </li>
-        <li class="nav-item" routerLinkActive="active-link">
-          <a class="nav-link" routerLink="/supported" *ngIf="isAuthenticated"
-            >Currencies</a
-          >
-        </li>
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            role="button"
-            data-bs-toggle="dropdown"
+        <button routerLink="transactions" class="btn btn-primary">
+          Transactions
+        </button>
+        <div ngbDropdown class="d-inline-block">
+          <button
             aria-expanded="false"
+            aria-haspopup="true"
+            class="btn btn-secondary dropdown-toggle dropdown-toggle"
+            data-toggle="dropdown"
+            class="btn btn-outline-primary"
+            id="dropdownBasic1"
+            ngbDropdownToggle
           >
-            Dropdown
-          </a>
-          <ul class="dropdown-menu">
-            <li>
-              <a
-                class="dropdown-item"
-                routerLink="/"
-                routerLinkActive="active-link"
-                >Another action</a
-              >
-            </li>
-            <li><hr class="dropdown-divider" /></li>
-            <li>
-              <a
-                class="dropdown-item"
-                routerLink="/"
-                routerLinkActive="active-link"
-                >Something else here</a
-              >
-            </li>
-          </ul>
-        </li>
+            Supported currencies
+          </button>
+          <div
+            ngbDropdownMenu
+            aria-labelledby="dropdownMenuButton"
+            class="dropdown-menu"
+          >
+            <button
+              routerLink="supportedFiat"
+              class="dropdown-item"
+              ngbDropdownItem
+            >
+              Fiat
+            </button>
+            <button
+              routerLink="supportedCrypto"
+              class="dropdown-item"
+              ngbDropdownItem
+            >
+              Crypto
+            </button>
+          </div>
+        </div>
         <li class="nav-item">
           <a class="nav-link disabled" routerLinkActive="active-link"
             >Disabled</a
