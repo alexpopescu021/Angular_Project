@@ -14,9 +14,19 @@
     ></app-list>
   </div>
   <button class="save-button" (click)="saveData()">Save</button>
-  <app-list
-    [items]="rightList"
-    title="Supported Crypto Currencies"
-    (itemClickedEvent)="moveItem($event, 'left')"
-  ></app-list>
+
+  <div class="search-list">
+    <input
+      type="text"
+      [(ngModel)]="searchTextRight"
+      (input)="applyFilterRight()"
+      placeholder="Search"
+    />
+
+    <app-list
+      [items]="filteredRightList"
+      title="Supported Crypto Currencies"
+      (itemClickedEvent)="moveItem($event, 'left')"
+    ></app-list>
+  </div>
 </div>

@@ -1,0 +1,87 @@
+<!-- modal -->
+<div
+  aria-hidden="true"
+  aria-labelledby="myModalLabel"
+  bsModal
+  class="modal fade modal-black"
+  #myModal2="bs-modal"
+  id="myModal2"
+  role="dialog"
+  tabindex="-1"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <button
+          aria-hidden="true"
+          class="close"
+          data-dismiss="modal"
+          (click)="myModal2.hide()"
+          type="button"
+        >
+          <i class="tim-icons icon-simple-remove text-white"> </i>
+        </button>
+        <div class="text-muted text-center ml-auto mr-auto">
+          <h3 class="mb-0">Edit Profile</h3>
+        </div>
+      </div>
+      <div class="modal-body">
+        <form role="form">
+          <div class="form-group mb-3">
+            <div class="input-group input-group-alternative">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="tim-icons icon-email-85"> </i>
+                </span>
+              </div>
+              <input
+                class="form-control"
+                placeholder="Name"
+                type="text"
+                [(ngModel)]="name"
+                name="name"
+              />
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <div class="input-group input-group-alternative">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="tim-icons icon-email-85"> </i>
+                </span>
+              </div>
+              <input
+                class="form-control"
+                placeholder="Email"
+                type="email"
+                [(ngModel)]="email"
+                name="email"
+              />
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <div class="input-group input-group-alternative">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="tim-icons icon-email-85"> </i>
+                </span>
+              </div>
+              <input
+                class="form-control"
+                placeholder="Address"
+                type="text"
+                [(ngModel)]="address"
+                name="address"
+              />
+            </div>
+          </div>
+          <div class="text-center">
+            <button class="btn btn-primary my-4" type="button">
+              Save Changes
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

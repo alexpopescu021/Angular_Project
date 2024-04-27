@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, catchError, throwError } from 'rxjs';
 import { LoginService } from '../services/login.service';
+import { SnackbarService } from '../services/snackbar.service';
 import { UserDto } from './user.model';
 
 @Component({
@@ -14,7 +15,13 @@ export class AuthComponent implements OnInit {
   isLoginMode = true;
   isLoading = false;
   error: string = '';
-  constructor(private loginService: LoginService, private router: Router) {}
+  hidePassword = true;
+
+  constructor(
+    private loginService: LoginService,
+    private router: Router,
+    private snackbarService: SnackbarService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -48,6 +55,7 @@ export class AuthComponent implements OnInit {
           console.log(error);
           this.error = error.error;
           this.isLoading = false;
+          this.snackbarService.open(error, 'Close', 3000, ['error-snackbar']);
           return throwError(() => new Error(error));
         })
       )
@@ -57,5 +65,9 @@ export class AuthComponent implements OnInit {
         this.router.navigate(['/transactions']);
       });
     form.reset();
+  }
+
+  togglePasswordVisibility() {
+    this.hidePassword = !this.hidePassword;
   }
 }

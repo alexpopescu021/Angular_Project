@@ -25,6 +25,8 @@ export class SupportedCryptoComponent implements OnInit {
   filteredLeftList: any[] = []; // Array to hold the filtered items
   searchText: string = ''; // Input field value
 
+  searchTextRight: string = ''; // Input field value
+  filteredRightList: any[] = []; // Array to hold the filtered items
   rightList: any[] = [];
 
   ngOnInit(): void {
@@ -48,6 +50,7 @@ export class SupportedCryptoComponent implements OnInit {
         }
       });
       this.rightList.sort();
+      this.filteredRightList = this.rightList; // Initially, both lists are the same
     });
   }
 
@@ -60,12 +63,21 @@ export class SupportedCryptoComponent implements OnInit {
     this.cdr.detectChanges();
   }
 
+  applyFilterRight() {
+    this.filteredRightList = this.filterPipe.transform(
+      this.rightList,
+      this.searchTextRight
+    );
+    // Trigger change detection
+    this.cdr.detectChanges();
+  }
+
   saveData() {
     this.supportedService.saveSupported(this.rightList, 'crypto').subscribe({
       next: () => {
         console.log('Data saved successfully');
         // Display success snackbar
-        this.snackbarService.open('Data saved successfully', 'Close', 5000, [
+        this.snackbarService.open('Data saved successfully', 'Close', 3000, [
           'success-snackbar',
         ]);
       },
@@ -78,13 +90,13 @@ export class SupportedCryptoComponent implements OnInit {
 
   moveItem(item: string, direction: 'left' | 'right') {
     if (direction === 'left') {
-      this.rightList = this.rightList.filter((i) => i !== item);
-      this.leftList.push(item);
-      this.leftList.sort();
+      this.filteredRightList = this.filteredRightList.filter((i) => i !== item);
+      this.filteredLeftList.push(item);
+      this.filteredLeftList.sort();
     } else {
-      this.leftList = this.leftList.filter((i) => i !== item);
-      this.rightList.push(item);
-      this.rightList.sort();
+      this.filteredLeftList = this.filteredLeftList.filter((i) => i !== item);
+      this.filteredRightList.push(item);
+      this.filteredRightList.sort();
     }
   }
 }

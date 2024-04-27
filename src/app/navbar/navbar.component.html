@@ -1,44 +1,42 @@
-<nav class="navbar navbar-expand-lg bg-dark">
+<nav
+  class="navbar navbar-expand-lg fixed-top navbar-transparent"
+  color-on-scroll="100"
+  id="navbar-top"
+>
   <div class="container-fluid">
     <a class="navbar-brand active" routerLink="/dashboard">Navbar</a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <button routerLink="transactions" class="btn btn-primary">
+        <button routerLink="transactions" class="btn btn-primary nav-item">
           Transactions
         </button>
-        <div ngbDropdown class="d-inline-block">
+        <div class="dropdown" dropdown>
           <button
             aria-expanded="false"
             aria-haspopup="true"
             class="btn btn-secondary dropdown-toggle dropdown-toggle"
             data-toggle="dropdown"
-            class="btn btn-outline-primary"
-            id="dropdownBasic1"
-            ngbDropdownToggle
+            dropdownToggle
+            id="dropdownMenuButton"
+            type="button"
+            *ngIf="isAuthenticated"
           >
             Supported currencies
           </button>
           <div
-            ngbDropdownMenu
             aria-labelledby="dropdownMenuButton"
             class="dropdown-menu"
+            style="left: 0px; right: auto"
           >
-            <button
-              routerLink="supportedFiat"
-              class="dropdown-item"
-              ngbDropdownItem
-            >
+            <button routerLink="supportedFiat" class="dropdown-item">
               Fiat
             </button>
-            <button
-              routerLink="supportedCrypto"
-              class="dropdown-item"
-              ngbDropdownItem
-            >
+            <button routerLink="supportedCrypto" class="dropdown-item">
               Crypto
             </button>
           </div>
         </div>
+
         <li class="nav-item">
           <a class="nav-link disabled" routerLinkActive="active-link"
             >Disabled</a
@@ -58,17 +56,17 @@
         <li class="nav-item" routerLinkActive="active-link">
           <a class="nav-link" routerLink="/user-list">Users</a>
         </li>
-        <li>
-          <a class="nav-link" routerLink="/auth" *ngIf="!isAuthenticated"
-            >Login</a
-          >
+        <li class="nav-item" *ngIf="name">
+          <p class="nav-link" routerLink="/profile" style="cursor: pointer">
+            Welcome&nbsp;<strong>{{ name }}</strong
+            >!
+          </p>
         </li>
-        <li>
-          <a
-            style="cursor: pointer"
-            class="nav-link"
-            *ngIf="isAuthenticated"
-            (click)="onLogout()"
+        <li *ngIf="!isAuthenticated">
+          <a class="nav-link" routerLink="/auth">Login</a>
+        </li>
+        <li class="nav-item" *ngIf="isAuthenticated">
+          <a style="cursor: pointer" class="nav-link" (click)="onLogout()"
             >Logout</a
           >
         </li>

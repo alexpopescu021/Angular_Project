@@ -18,6 +18,7 @@ export class SnackbarService {
     config.panelClass = panelClass;
     config.horizontalPosition = 'end';
     config.verticalPosition = 'top';
-    this.snackBar.open(message, action, config);
+    let snackbarRef = this.snackBar.open(message, action, config);
+    snackbarRef.afterDismissed().subscribe(() => {});
   }
 }

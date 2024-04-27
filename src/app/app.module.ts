@@ -7,6 +7,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgChartsModule } from 'ng2-charts';
+import { AlertModule } from 'ngx-bootstrap/alert';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { LoadingSpinnerComponent } from 'src/shared/loading-spinner.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,11 +29,15 @@ import { MaterialModule } from './material.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NewTransactionComponent } from './new-transaction/new-transaction.component';
 import { FilterItemsPipe } from './pipes/filterItems/filter-items.pipe';
+import { ProfileComponent } from './profile/profile.component';
 import { TransactionService } from './services/transaction.service';
 import { SupportedCryptoComponent } from './supported-crypto/supported-crypto.component';
 import { SupportedFiatComponent } from './supported-fiat/supported-fiat.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { UserListComponent } from './user-list/user-list.component';
+
+import { FooterComponent } from './footer/footer.component';
+import { ProfileModalComponent } from './profile/profile-modal/profile-modal.component';
 import { UserComponent } from './user/user.component';
 
 @NgModule({
@@ -42,6 +56,9 @@ import { UserComponent } from './user/user.component';
     ConversionComponent,
     AuthComponent,
     LoadingSpinnerComponent,
+    ProfileComponent,
+    FooterComponent,
+    ProfileModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +66,16 @@ import { UserComponent } from './user/user.component';
     BrowserAnimationsModule,
     RouterModule,
     NgChartsModule,
+    BsDropdownModule.forRoot(),
+    ProgressbarModule.forRoot(),
+    TooltipModule.forRoot(),
+    CollapseModule.forRoot(),
+    TabsModule.forRoot(),
+    PaginationModule.forRoot(),
+    AlertModule.forRoot(),
+    BsDatepickerModule.forRoot(),
+    CarouselModule.forRoot(),
+    ModalModule.forRoot(),
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,

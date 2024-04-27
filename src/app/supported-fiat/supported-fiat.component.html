@@ -1,13 +1,29 @@
 <div class="container">
-  <app-list
-    [items]="leftList"
-    title="All Fiat Currencies"
-    (itemClickedEvent)="moveItem($event, 'right')"
-  ></app-list>
+  <div class="search-list">
+    <input
+      type="text"
+      [(ngModel)]="searchText"
+      (input)="applyFilter()"
+      placeholder="Search"
+    />
+    <app-list
+      [items]="filteredLeftList"
+      title="All Fiat Currencies"
+      (itemClickedEvent)="moveItem($event, 'right')"
+    ></app-list>
+  </div>
   <button class="save-button" (click)="saveData()">Save</button>
-  <app-list
-    [items]="rightList"
-    title="Supported Fiat Currencies"
-    (itemClickedEvent)="moveItem($event, 'left')"
-  ></app-list>
+  <div class="search-list">
+    <input
+      type="text"
+      [(ngModel)]="searchTextRight"
+      (input)="applyFilterRight()"
+      placeholder="Search"
+    />
+    <app-list
+      [items]="filteredRightList"
+      title="Supported Fiat Currencies"
+      (itemClickedEvent)="moveItem($event, 'left')"
+    ></app-list>
+  </div>
 </div>

@@ -4,6 +4,7 @@ import { AuthComponent } from './auth/auth.component';
 import { ConversionComponent } from './conversion/conversion.component';
 import { DashComponent } from './dash/dash.component';
 import { NewTransactionComponent } from './new-transaction/new-transaction.component';
+import { ProfileComponent } from './profile/profile.component';
 import { SupportedCryptoComponent } from './supported-crypto/supported-crypto.component';
 import { SupportedFiatComponent } from './supported-fiat/supported-fiat.component';
 import { TransactionsComponent } from './transactions/transactions.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'new-transaction', component: NewTransactionComponent },
   { path: 'conversion', component: ConversionComponent },
   { path: 'auth', component: AuthComponent },
+  { path: 'profile', component: ProfileComponent },
 ];
 
 @NgModule({
