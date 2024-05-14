@@ -1,3 +1,8 @@
-<div>
-  <canvas id="canvas">{{ chart }}</canvas>
+<div style="display: flex; justify-content: space-around">
+  <div>
+    <canvas id="lineCanvas"></canvas>
+    <button (click)="changeTimePeriod('1D')">1D</button>
+    <button (click)="changeTimePeriod('7D')">7D</button>
+    <button (click)="changeTimePeriod('1M')">1M</button>
+  </div>
 </div>

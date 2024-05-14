@@ -1,0 +1,16 @@
+<div id="chartWithButtons">
+  <select (change)="updateChart($any($event).target.value, '1d')">
+    <option value="btc">BTC</option>
+    <option value="eth">ETH</option>
+    <!-- Add more options as needed -->
+  </select>
+
+  <select (change)="updateChart('btc', $any($event).target.value)">
+    <option value="1d">1D</option>
+    <option value="7d">7D</option>
+    <option value="1m">1M</option>
+    <!-- Add more options as needed -->
+  </select>
+
+  <div id="chart-container"></div>
+</div>

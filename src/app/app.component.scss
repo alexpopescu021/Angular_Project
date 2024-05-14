@@ -1,0 +1,14 @@
+.main-container {
+  display: flex;
+  flex-direction: column; /* Stack the children vertically */
+  min-height: 100vh; /* Minimum height of the viewport */
+}
+
+.main-content {
+  flex-grow: 1; /* Grow to fill the space */
+}
+
+#chart-container {
+  width: 400px;
+  height: 300px;
+}

@@ -36,6 +36,8 @@ import { SupportedFiatComponent } from './supported-fiat/supported-fiat.componen
 import { TransactionsComponent } from './transactions/transactions.component';
 import { UserListComponent } from './user-list/user-list.component';
 
+import { MarketChartComponent } from './charts/market-chart/market-chart.component';
+import { PortofolioChartComponent } from './charts/portofolio-chart/portofolio-chart.component';
 import { FooterComponent } from './footer/footer.component';
 import { ProfileModalComponent } from './profile/profile-modal/profile-modal.component';
 import { UserComponent } from './user/user.component';
@@ -51,6 +53,8 @@ import { UserComponent } from './user/user.component';
     SupportedCryptoComponent,
     DashComponent,
     ProfitChartComponent,
+    MarketChartComponent,
+    PortofolioChartComponent,
     UserListComponent,
     NewTransactionComponent,
     ConversionComponent,

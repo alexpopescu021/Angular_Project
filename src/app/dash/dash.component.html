@@ -1,21 +1,21 @@
 <div class="grid-container">
   <h1 class="mat-h1">Dashboard</h1>
-  <mat-grid-list cols="4" rowHeight="350px">
-    <mat-grid-tile
-      [colspan]="(cardLayout | async)?.chart?.cols"
-      [rowspan]="(cardLayout | async)?.chart?.rows"
-    >
-      <mat-card title="Monthly Revenue">
-        <mat-card-title>Test</mat-card-title>
-        <app-profit-chart></app-profit-chart>
+  <mat-grid-list cols="3" rowHeight="1:1" gutterSize="15px">
+    <mat-grid-tile>
+      <mat-card title="Market">
+        <mat-card-title>Market</mat-card-title>
+        <app-market-chart></app-market-chart>
       </mat-card>
     </mat-grid-tile>
-
-    <mat-grid-tile
-      [colspan]="(cardLayout | async)?.chart?.cols"
-      [rowspan]="(cardLayout | async)?.chart?.rows"
-    >
-      <mat-card title="Monthly Revenue">
+    <mat-grid-tile>
+      <mat-card title="Portofolio">
+        <mat-card-title>Portofolio</mat-card-title>
+        <app-portofolio-chart></app-portofolio-chart>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-card title="Profit">
+        <mat-card-title>Profit</mat-card-title>
         <app-profit-chart></app-profit-chart>
       </mat-card>
     </mat-grid-tile>

@@ -1,26 +1,18 @@
 .grid-container {
-  margin: 20px;
+  display: flex;
+  justify-content: space-between;
 }
 
-.dashboard-card {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  right: 15px;
-  bottom: 15px;
+mat-card {
+  background-color: #1e1e2d !important;
+  flex: 1;
+  margin: 0 10px; /* Adjust as needed */
 }
 
-.more-button {
-  position: absolute;
-  top: 5px;
-  right: 10px;
+mat-grid-list {
+  position: static !important;
 }
 
-.dashboard-card-content {
-  text-align: center;
-}
-
-.mat-card-title {
-  color: black;
-  text-align: center;
+table {
+  color: white;
 }

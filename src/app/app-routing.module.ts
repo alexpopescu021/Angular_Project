@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './auth/auth.component';
+import { TradeChartComponent } from './charts/trade-chart/trade-chart.component';
 import { ConversionComponent } from './conversion/conversion.component';
 import { DashComponent } from './dash/dash.component';
 import { NewTransactionComponent } from './new-transaction/new-transaction.component';
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'conversion', component: ConversionComponent },
   { path: 'auth', component: AuthComponent },
   { path: 'profile', component: ProfileComponent },
+  { path: 'tradeChart', component: TradeChartComponent },
 ];
 
 @NgModule({
