@@ -12,7 +12,7 @@ import { ExtCurrencyService } from '../services/externalServices/service/ext-cur
 })
 export class CoinListComponent implements OnInit {
   bannerData: any = [];
-  currency: string = 'INR';
+  currency: string = 'EUR';
   dataSource!: MatTableDataSource<any>;
   displayedColumns: string[] = [
     'symbol',

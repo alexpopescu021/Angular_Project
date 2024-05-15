@@ -81,6 +81,9 @@
             "development": {
               "proxyConfig": "src/proxy.config.json",
               "browserTarget": "Angular_Project:build:development"
+            },
+            "options": {
+              "liveReload": true
             }
           },
           "defaultConfiguration": "development"

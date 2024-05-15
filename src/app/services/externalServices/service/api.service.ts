@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
   constructor(private http: HttpClient) {}
-  public apikey: string = '	CG-q4m72EDsY11q54LTdVgbWaxv';
+  public apikey: string = 'CG-q4m72EDsY11q54LTdVgbWaxv';
   getCurrency(currency: string) {
     return this.http.get<any>(
       `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&sparkline=false&x_cg_demo_api_key=${this.apikey}`
@@ -18,12 +19,20 @@ export class ApiService {
   }
   getGrpahicalCurrencyData(coinId: string, currency: string, days: number) {
     return this.http.get<any>(
-      `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency}&days=${days}&x_cg_demo_api_key=${this.apikey}`
+      `https://api.coingecko.com/api/v3/coins/${coinId}/ohlc?vs_currency=${currency}&days=${days}&x_cg_demo_api_key=${this.apikey}`
     );
   }
   getCurrencyById(coinId: string) {
     return this.http.get<any>(
       `https://api.coingecko.com/api/v3/coins/${coinId}`
     );
+  }
+
+  searchCurrency(currency: string) {
+    return this.http
+      .get<any>(
+        `https://api.coingecko.com/api/v3/search?query=${currency}&x_cg_demo_api_key=CG-q4m72EDsY11q54LTdVgbWaxv`
+      )
+      .pipe(map((response) => response.coins));
   }
 }

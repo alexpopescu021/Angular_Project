@@ -1,7 +1,7 @@
 <div class="banner">
   <div class="container">
     <div class="header">
-      <h2>Crypto Checker YT</h2>
+      <h2>Crypto Checker</h2>
       <h6>Check all the crypto currency lastest updates</h6>
     </div>
     <div class="sub-header">
@@ -14,16 +14,16 @@
       >
         <div class="row">
           <ng-container *ngFor="let row of bannerData">
-            <div class="col-1">
+            <div class="col-1" (click)="gotoDetails(row)">
               <div class="card">
                 <img [src]="row.image" width="100" class="img-fluid" alt="" />
                 <div class="card-body">
                   <h5 class="card-title">
                     {{ row.symbol | uppercase }}
-                    <span class="text-danger"
-                      >{{ row.market_cap_change_percentage_24h }}%</span
-                    >
                   </h5>
+                  <span class="text-success"
+                    >{{ row.market_cap_change_percentage_24h }}%</span
+                  >
                   <p class="card-text">
                     {{ row.current_price | currency : currency }}
                   </p>
@@ -40,12 +40,12 @@
 <div class="container">
   <!-- Table -->
   <mat-form-field appearance="standard">
-    <mat-label>Filter</mat-label>
+    <label>Filter</label>
     <input
-      style="color: aliceblue"
+      class="form-control"
       matInput
       (keyup)="applyFilter($event)"
-      placeholder="Ex. Mia"
+      placeholder="Ex. BTC"
       #input
     />
   </mat-form-field>

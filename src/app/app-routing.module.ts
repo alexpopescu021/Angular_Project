@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './auth/auth.component';
-import { TradeChartComponent } from './charts/trade-chart/trade-chart.component';
 import { CoinDetailComponent } from './coin-detail/coin-detail.component';
 import { CoinListComponent } from './coin-list/coin-list.component';
 import { ConversionComponent } from './conversion/conversion.component';
@@ -23,7 +22,6 @@ const routes: Routes = [
   { path: 'conversion', component: ConversionComponent },
   { path: 'auth', component: AuthComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: 'tradeChart', component: TradeChartComponent },
   { path: '', redirectTo: 'coin-list', pathMatch: 'full' },
   { path: 'coin-list', component: CoinListComponent },
   { path: 'coin-detail/:id', component: CoinDetailComponent },

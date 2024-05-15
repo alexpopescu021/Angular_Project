@@ -5,6 +5,12 @@
   color: #fff; /* Example text color */
 }
 
-.btn.dropdown-toggle[data-toggle=dropdown]{
+.btn.dropdown-toggle[data-toggle="dropdown"] {
   margin-bottom: 0 !important;
+}
+
+.dropdown-menu {
+  height: auto;
+  max-height: 140px; /* Adjust this value to display only 5 items */
+  overflow-x: hidden;
 }

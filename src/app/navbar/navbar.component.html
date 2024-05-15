@@ -7,8 +7,8 @@
     <a class="navbar-brand active" routerLink="/dashboard">Navbar</a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <button routerLink="tradeChart" class="btn btn-primary nav-item">
-          Chart
+        <button routerLink="coin-list" class="btn btn-primary nav-item">
+          List
         </button>
         <button routerLink="transactions" class="btn btn-primary nav-item">
           Transactions
@@ -46,15 +46,32 @@
           >
         </li>
       </ul>
-      <form class="d-flex" role="search">
+      <form class="d-flex dropdown" role="search" dropdown>
         <input
+          [formControl]="searchControl"
           class="form-control me-2"
           type="search"
           placeholder="Search"
           aria-label="Search"
         />
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <button class="btn btn-outline-success" type="submit" dropdownToggle>
+          Search
+        </button>
+        <div
+          aria-labelledby="dropdownMenuButton"
+          class="dropdown-menu"
+          *ngIf="filteredCoins | async as coins"
+        >
+          <div
+            class="dropdown-item"
+            *ngFor="let coin of coins"
+            (click)="gotoDetails(coin)"
+          >
+            {{ coin.name }}
+          </div>
+        </div>
       </form>
+
       <ul class="navbar-nav ms-auto">
         <li class="nav-item" routerLinkActive="active-link">
           <a class="nav-link" routerLink="/user-list">Users</a>
