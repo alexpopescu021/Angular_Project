@@ -36,8 +36,11 @@ import { SupportedFiatComponent } from './supported-fiat/supported-fiat.componen
 import { TransactionsComponent } from './transactions/transactions.component';
 import { UserListComponent } from './user-list/user-list.component';
 
+import { CommonModule } from '@angular/common';
 import { MarketChartComponent } from './charts/market-chart/market-chart.component';
 import { PortofolioChartComponent } from './charts/portofolio-chart/portofolio-chart.component';
+import { CoinDetailComponent } from './coin-detail/coin-detail.component';
+import { CoinListComponent } from './coin-list/coin-list.component';
 import { FooterComponent } from './footer/footer.component';
 import { ProfileModalComponent } from './profile/profile-modal/profile-modal.component';
 import { UserComponent } from './user/user.component';
@@ -63,9 +66,12 @@ import { UserComponent } from './user/user.component';
     ProfileComponent,
     FooterComponent,
     ProfileModalComponent,
+    CoinListComponent,
+    CoinDetailComponent,
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     NgbDropdownModule,
     BrowserAnimationsModule,
     RouterModule,
