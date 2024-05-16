@@ -42,7 +42,6 @@ import { PortofolioChartComponent } from './charts/portofolio-chart/portofolio-c
 import { CoinDetailComponent } from './coin-detail/coin-detail.component';
 import { CoinListComponent } from './coin-list/coin-list.component';
 import { FooterComponent } from './footer/footer.component';
-import { ProfileModalComponent } from './profile/profile-modal/profile-modal.component';
 import { UserComponent } from './user/user.component';
 
 @NgModule({
@@ -65,7 +64,6 @@ import { UserComponent } from './user/user.component';
     LoadingSpinnerComponent,
     ProfileComponent,
     FooterComponent,
-    ProfileModalComponent,
     CoinListComponent,
     CoinDetailComponent,
   ],

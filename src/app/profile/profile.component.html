@@ -7,21 +7,33 @@
     <div class="container align-items-center">
       <div class="row">
         <div class="col-lg-6 col-md-6">
-          <h1 class="profile-title text-left">{{ name }}</h1>
+          <h1 class="profile-title text-left">Mike Scheinder</h1>
           <h5 class="text-on-back">01</h5>
-          <p class="profile-description">Email: {{ email }}</p>
-          <p class="profile-description">Address: {{ address }}</p>
+          <p class="profile-description">
+            Offices parties lasting outward nothing age few resolve. Impression
+            to discretion understood to we interested he excellence. Him
+            remarkably use projection collecting. Going about eat forty world
+            has round miles.
+          </p>
           <div class="btn-wrapper profile pt-3">
-            <button
-              class="btn btn-success"
-              data-target="#myModal2"
-              (click)="openModal()"
-            >
-              Launch Modal Form
-            </button>
+            <a
+              class="btn btn-icon btn-twitter btn-round mr-1"
+              href="https://twitter.com/creativetim"
+              target="_blank"
+              ><i class="fab fa-twitter"></i></a
+            ><a
+              class="btn btn-icon btn-facebook btn-round mr-1"
+              href="https://www.facebook.com/creativetim"
+              target="_blank"
+              ><i class="fab fa-facebook-square"></i></a
+            ><a
+              class="btn btn-icon btn-dribbble btn-round"
+              href="https://dribbble.com/creativetim"
+              target="_blank"
+              ><i class="fab fa-dribbble"></i
+            ></a>
           </div>
         </div>
-
         <div class="col-lg-4 col-md-6 ml-auto mr-auto">
           <div class="card card-coin card-plain">
             <div class="card-header">
@@ -29,102 +41,131 @@
                 class="img-center img-fluid rounded-circle"
                 src="assets/img/mike.jpg"
               />
-
               <h4 class="title">Transactions</h4>
             </div>
             <div class="card-body">
               <tabset
-                class="nav-tabs-danger justify-content-center tab-subcategories"
-              >
-                <tab heading="Wallet">
-                  <div class="table-responsive">
-                    <table class="table tablesorter" id="plain-table">
-                      <thead class="text-danger">
-                        <tr>
-                          <th class="header">COIN</th>
-                          <th class="header">AMOUNT</th>
-                          <th class="header">VALUE</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>BTC</td>
-                          <td>7.342</td>
-                          <td>48,870.75 USD</td>
-                        </tr>
-                        <tr>
-                          <td>ETH</td>
-                          <td>30.737</td>
-                          <td>64,53.30 USD</td>
-                        </tr>
-                        <tr>
-                          <td>XRP</td>
-                          <td>19.242</td>
-                          <td>18,354.96 USD</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </tab>
-                <tab heading="Send">
-                  <div class="row">
-                    <label class="col-sm-3 col-form-label"> Pay to </label>
-                    <div class="col-sm-9">
-                      <div class="form-group">
-                        <input
-                          class="form-control"
-                          placeholder="e.g. 1Nasd92348hU984353hfid"
-                          type="text"
-                        />
-
-                        <span class="form-text">
-                          Please enter a valid address.
-                        </span>
+                class="nav-tabs-danger justify-content-center tab-subcategories tab-container"
+                _nghost-qtc-c1=""
+                ><ul _ngcontent-qtc-c1="" class="nav nav-tabs">
+                  <!---->
+                  <li _ngcontent-qtc-c1="" class="nav-item active">
+                    <a
+                      _ngcontent-qtc-c1=""
+                      class="nav-link active"
+                      href="javascript:void(0);"
+                      id=""
+                      ><span _ngcontent-qtc-c1="">Wallet</span
+                      ><!----></a
+                    >
+                  </li>
+                  <li _ngcontent-qtc-c1="" class="nav-item">
+                    <a
+                      _ngcontent-qtc-c1=""
+                      class="nav-link"
+                      href="javascript:void(0);"
+                      id=""
+                      ><span _ngcontent-qtc-c1="">Send</span
+                      ><!----></a
+                    >
+                  </li>
+                  <li _ngcontent-qtc-c1="" class="nav-item">
+                    <a
+                      _ngcontent-qtc-c1=""
+                      class="nav-link"
+                      href="javascript:void(0);"
+                      id=""
+                      ><span _ngcontent-qtc-c1="">News</span
+                      ><!----></a
+                    >
+                  </li>
+                </ul>
+                <div _ngcontent-qtc-c1="" class="tab-content">
+                  <tab heading="Wallet" class="active tab-pane"
+                    ><div class="table-responsive">
+                      <table class="table tablesorter" id="plain-table">
+                        <thead class="text-danger">
+                          <tr>
+                            <th class="header">COIN</th>
+                            <th class="header">AMOUNT</th>
+                            <th class="header">VALUE</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>BTC</td>
+                            <td>7.342</td>
+                            <td>48,870.75 USD</td>
+                          </tr>
+                          <tr>
+                            <td>ETH</td>
+                            <td>30.737</td>
+                            <td>64,53.30 USD</td>
+                          </tr>
+                          <tr>
+                            <td>XRP</td>
+                            <td>19.242</td>
+                            <td>18,354.96 USD</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div></tab
+                  ><tab heading="Send" class="tab-pane"
+                    ><div class="row">
+                      <label class="col-sm-3 col-form-label"> Pay to </label>
+                      <div class="col-sm-9">
+                        <div class="form-group">
+                          <input
+                            class="form-control"
+                            placeholder="e.g. 1Nasd92348hU984353hfid"
+                            type="text"
+                          /><span class="form-text">
+                            Please enter a valid address.
+                          </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="row">
-                    <label class="col-sm-3 col-form-label"> Amount </label>
-                    <div class="col-sm-9">
-                      <div class="form-group">
-                        <input
-                          class="form-control"
-                          placeholder="1.587"
-                          type="text"
-                        />
+                    <div class="row">
+                      <label class="col-sm-3 col-form-label"> Amount </label>
+                      <div class="col-sm-9">
+                        <div class="form-group">
+                          <input
+                            class="form-control"
+                            placeholder="1.587"
+                            type="text"
+                          />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <button
-                    class="btn btn-simple btn-danger btn-icon btn-round float-right"
-                    type="submit"
+                    <button
+                      class="btn btn-simple btn-danger btn-icon btn-round float-right"
+                      type="submit"
+                    >
+                      <i class="tim-icons icon-send"></i></button></tab
+                  ><tab heading="News" class="tab-pane"
+                    ><div class="table-responsive">
+                      <table class="table tablesorter" id="plain-table">
+                        <thead class="text-danger">
+                          <tr>
+                            <th class="header">Latest Crypto News</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>The Daily: Nexo to Pay on Stable...</td>
+                          </tr>
+                          <tr>
+                            <td>Venezuela Begins Public of Nation...</td>
+                          </tr>
+                          <tr>
+                            <td>PR: BitCanna â Dutch Blockchain...</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div></tab
                   >
-                    <i class="tim-icons icon-send"> </i>
-                  </button>
-                </tab>
-                <tab heading="News">
-                  <div class="table-responsive">
-                    <table class="table tablesorter" id="plain-table">
-                      <thead class="text-danger">
-                        <tr>
-                          <th class="header">Latest Crypto News</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>The Daily: Nexo to Pay on Stable...</td>
-                        </tr>
-                        <tr>
-                          <td>Venezuela Begins Public of Nation...</td>
-                        </tr>
-                        <tr>
-                          <td>PR: BitCanna â Dutch Blockchain...</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </tab>
-              </tabset>
+                </div></tabset
+              >
             </div>
           </div>
         </div>

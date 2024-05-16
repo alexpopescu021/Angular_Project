@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { ProfileModalComponent } from './profile-modal/profile-modal.component';
 
 @Component({
   selector: 'app-profile',
@@ -25,9 +24,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
       email: 'john@example.com', // Pass your email data here
       address: '123 Street, City', // Pass your address data here
     };
-    this.modalRef = this.modalService.show(ProfileModalComponent, {
-      initialState,
-    });
   }
 
   closeModal() {

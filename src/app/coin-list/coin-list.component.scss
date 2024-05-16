@@ -24,7 +24,7 @@
 
 .banner {
   background-image: url("../../assets/banner2.jpg");
-  height: 330px;
+  height: 360px;
   width: 100%;
 }
 
@@ -101,4 +101,13 @@ th {
 
 tr:hover {
   background-color: #2d2e79;
+  cursor: pointer;
+}
+
+.container {
+  margin-top: 50px;
+}
+
+mat-paginator {
+  color: white;
 }

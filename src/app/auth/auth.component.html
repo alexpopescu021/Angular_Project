@@ -1,49 +1,69 @@
-<h2 class="text-center mb-4">
-  {{ isLoginMode ? "Login" : "Register" }}
-</h2>
-<form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" class="container">
-  <div class="form-group">
-    <label for="username">Username</label>
-    <input
-      type="text"
-      id="username"
-      class="form-control"
-      ngModel
-      name="username"
-      required
-    />
-  </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <div style="position: relative">
-      <input
-        [type]="hidePassword ? 'password' : 'text'"
-        id="password"
-        class="form-control"
-        ngModel
-        name="password"
-        required
-      />
-      <span
-        class="password-toggle-icon"
-        style="
-          position: absolute;
-          right: 10px;
-          top: 50%;
-          transform: translateY(-50%);
-        "
-        title="Show password"
-        (click)="togglePasswordVisibility()"
+<div class="col-lg-4">
+  <div class="card card-register">
+    <div class="card-header">
+      <img alt="Card image" class="card-img" src="assets/img/square1-red.png" />
+      <h4 class="card-title">{{ isLoginMode ? "Login" : "Register" }}</h4>
+    </div>
+    <div class="card-body">
+      <form
+        #authForm="ngForm"
+        (ngSubmit)="onSubmit(authForm)"
+        class="container"
       >
-        <i class="fa-regular fa-eye"></i>
-      </span>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            class="form-control"
+            ngModel
+            name="username"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div style="position: relative">
+            <input
+              [type]="hidePassword ? 'password' : 'text'"
+              id="password"
+              class="form-control"
+              ngModel
+              name="password"
+              required
+            />
+            <span
+              class="password-toggle-icon"
+              style="
+                position: absolute;
+                right: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+              "
+              title="Show password"
+              (click)="togglePasswordVisibility()"
+            >
+              <i class="fa-regular fa-eye"></i>
+            </span>
+          </div>
+        </div>
+        <button
+          type="submit"
+          class="btn btn-danger btn-round btn-lg"
+          [disabled]="!authForm.valid"
+        >
+          {{ isLoginMode ? "Login" : "Register" }}
+        </button>
+      </form>
+    </div>
+    <div class="card-footer">
+      <a
+        (click)="onSwitchMode()"
+        class="btn btn-danger btn-round btn-lg"
+        href="javascript:void(0)"
+      >
+        {{ isLoginMode ? "Sign up" : "Login" }}
+      </a>
     </div>
   </div>
-  <button type="submit" class="btn btn-primary" [disabled]="!authForm.valid">
-    {{ isLoginMode ? "Login" : "Register" }}
-  </button>
-  <span class="mx-2">or</span>
-  <button (click)="onSwitchMode()" type="button" class="btn btn-primary">
-    Switch to {{ isLoginMode ? "Sign up" : "Login" }}
-  </button>
-</form>
+</div>

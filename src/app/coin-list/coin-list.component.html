@@ -2,16 +2,9 @@
   <div class="container">
     <div class="header">
       <h2>Crypto Checker</h2>
-      <h6>Check all the crypto currency lastest updates</h6>
     </div>
     <div class="sub-header">
-      <marquee
-        behavior="scroll"
-        onmouseover="stop()"
-        onmouseout="start()"
-        loop="infinite"
-        direction="left"
-      >
+      <carousel behavior="scroll" loop="infinite" direction="left">
         <div class="row">
           <ng-container *ngFor="let row of bannerData">
             <div class="col-1" (click)="gotoDetails(row)">
@@ -32,23 +25,21 @@
             </div>
           </ng-container>
         </div>
-      </marquee>
+      </carousel>
     </div>
   </div>
 </div>
 
 <div class="container">
   <!-- Table -->
-  <mat-form-field appearance="standard">
-    <label>Filter</label>
+  <div class="form-group">
     <input
       class="form-control"
-      matInput
       (keyup)="applyFilter($event)"
       placeholder="Ex. BTC"
       #input
     />
-  </mat-form-field>
+  </div>
 
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort>
@@ -100,9 +91,6 @@
       </tr>
     </table>
 
-    <mat-paginator
-      [pageSizeOptions]="[10, 25, 50, 100]"
-      aria-label="Select page of users"
-    ></mat-paginator>
+    <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]"></mat-paginator>
   </div>
 </div>
