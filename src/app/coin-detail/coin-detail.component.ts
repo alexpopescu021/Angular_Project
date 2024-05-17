@@ -7,21 +7,18 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Chart, LinearScale, TimeScale } from 'chart.js';
+import { Chart } from 'chart.js';
+import 'chartjs-adapter-luxon';
 import {
   CandlestickController,
   CandlestickElement,
 } from 'chartjs-chart-financial';
+import zoomPlugin from 'chartjs-plugin-zoom';
 
 import { ApiService } from '../services/externalServices/service/api.service';
 import { ExtCurrencyService } from '../services/externalServices/service/ext-currency.service';
 
-Chart.register(
-  CandlestickElement,
-  CandlestickController,
-  TimeScale,
-  LinearScale
-);
+Chart.register(CandlestickElement, CandlestickController, zoomPlugin);
 
 @Component({
   selector: 'app-coin-detail',
@@ -51,18 +48,16 @@ export class CoinDetailComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((val) => {
       this.coinId = val['id'];
+      this.getCoinData();
     });
-    this.getCoinData();
     this.currencyService.getCurrency().subscribe((val) => {
       this.currency = val;
       this.updateChartData();
-      this.getCoinData();
     });
   }
 
   ngAfterViewInit(): void {
     this.initChart();
-    this.updateChartData();
   }
 
   initChart(): void {
@@ -72,6 +67,16 @@ export class CoinDetailComponent implements OnInit, OnDestroy, AfterViewInit {
         datasets: [],
       },
       options: {
+        plugins: {
+          zoom: {
+            zoom: {
+              wheel: {
+                enabled: true,
+              },
+              mode: 'xy',
+            },
+          },
+        },
         scales: {
           x: {
             type: 'time',
@@ -82,6 +87,8 @@ export class CoinDetailComponent implements OnInit, OnDestroy, AfterViewInit {
         },
       },
     });
+    this.updateChartData();
+    this.chart.update();
   }
 
   updateChartData(): void {
@@ -92,13 +99,6 @@ export class CoinDetailComponent implements OnInit, OnDestroy, AfterViewInit {
 
   getCoinData() {
     this.api.getCurrencyById(this.coinId).subscribe((res) => {
-      console.log(this.coinData);
-      if (this.currency === 'USD') {
-        res.market_data.current_price.eur = res.market_data.current_price.usd;
-        res.market_data.market_cap.eur = res.market_data.market_cap.usd;
-      }
-      res.market_data.current_price.eur = res.market_data.current_price.eur;
-      res.market_data.market_cap.eur = res.market_data.market_cap.eur;
       this.coinData = res;
     });
   }
@@ -108,18 +108,18 @@ export class CoinDetailComponent implements OnInit, OnDestroy, AfterViewInit {
     this.api
       .getGrpahicalCurrencyData(this.coinId, this.currency, this.days)
       .subscribe((res) => {
-        if (this.chart && this.chart.data) {
-          this.chart.data.datasets = [
-            {
-              data: res.map((a: any) => ({
-                t: a[0], // time
-                o: a[1], // open
-                h: a[2], // high
-                l: a[3], // low
-                c: a[4], // close
-              })),
-            },
-          ];
+        if (this.chart) {
+          const dataset = {
+            data: res.map((a: any) => ({
+              x: a[0], // time
+              o: a[1], // open
+              h: a[2], // high
+              l: a[3], // low
+              c: a[4], // close
+            })),
+          };
+          this.chart.data.datasets = [dataset];
+          this.chart.update();
         }
       });
   }
