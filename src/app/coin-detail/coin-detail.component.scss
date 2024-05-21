@@ -1,21 +1,29 @@
+:host {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 .details {
   width: 30%;
   display: flex;
-  margin-top: 25px;
   align-items: center;
   border-right: 2px solid grey;
   flex-direction: column;
   h3 {
     font-weight: bold;
-    margin-bottom: 20px;
   }
   h6 {
     width: 100%;
-    padding: 25px;
     text-align: justify;
     padding-top: 0;
     padding-bottom: 15px;
   }
+}
+
+.bundle {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .img {
@@ -25,15 +33,16 @@
 }
 
 .more-detail {
-  padding: 10px;
-  margin: 10px;
-  line-height: 50px;
+  padding: 5px;
+  line-height: 30px;
+  border: #009688;
+  border-width: 10px;
   .title {
-    font-size: 18px;
+    font-size: 14px;
     font-weight: 600;
   }
   .value {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
   }
 }
@@ -89,4 +98,9 @@
 
 .asks .price {
   background-color: red;
+}
+
+#crypto-depth {
+  width: 400px;
+  height: 500px;
 }

@@ -36,7 +36,15 @@ export class CoinDetailComponent implements OnInit, OnDestroy, AfterViewInit {
   asks: any[] = [];
 
   depthData: ChartDataset[] = [];
-
+  chartOptions: any = {
+    scales: {},
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+    events: [],
+  };
   constructor(
     private api: ApiService,
     private activatedRoute: ActivatedRoute,
@@ -76,13 +84,17 @@ export class CoinDetailComponent implements OnInit, OnDestroy, AfterViewInit {
     this.bids.forEach((bid, i) => {
       this.depthData.push({
         data: [{ x: bid.price, y: bid.amount }],
-        backgroundColor: 'green',
+        backgroundColor: 'rgba(0, 255, 0, 0.1)', // green with 10% opacity for bids
+        borderColor: 'rgb(0, 255, 0)', // solid green for bids
+        borderWidth: 1,
       });
     });
     this.asks.forEach((ask, i) => {
       this.depthData.push({
         data: [{ x: ask.price, y: ask.amount }],
-        backgroundColor: 'red',
+        backgroundColor: 'rgba(255, 0, 0, 0.1)', // red with 10% opacity for asks
+        borderColor: 'rgb(255, 0, 0)', // solid red for asks
+        borderWidth: 1,
       });
     });
   }
@@ -106,6 +118,9 @@ export class CoinDetailComponent implements OnInit, OnDestroy, AfterViewInit {
               },
               mode: 'xy',
             },
+          },
+          legend: {
+            display: false,
           },
         },
         scales: {

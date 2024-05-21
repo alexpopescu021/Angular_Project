@@ -7,12 +7,12 @@
     <a class="navbar-brand active" routerLink="/dashboard">Navbar</a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <button routerLink="coin-list" class="btn btn-primary nav-item">
-          List
-        </button>
-        <button routerLink="transactions" class="btn btn-primary nav-item">
-          Transactions
-        </button>
+        <li class="nav-item">
+          <a routerLink="coin-list" class="nav-link"> List </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="transactions" class="nav-link"> Transactions </a>
+        </li>
         <div class="dropdown" dropdown>
           <button
             aria-expanded="false"
@@ -39,12 +39,6 @@
             </button>
           </div>
         </div>
-
-        <li class="nav-item">
-          <a class="nav-link disabled" routerLinkActive="active-link"
-            >Disabled</a
-          >
-        </li>
       </ul>
       <form class="d-flex dropdown" role="search" dropdown>
         <input
@@ -73,7 +67,7 @@
       </form>
 
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item" routerLinkActive="active-link">
+        <li class="nav-item">
           <a class="nav-link" routerLink="/user-list">Users</a>
         </li>
         <li class="nav-item" *ngIf="name">
@@ -82,7 +76,7 @@
             >!
           </p>
         </li>
-        <li *ngIf="!isAuthenticated">
+        <li *ngIf="!isAuthenticated" class="nav-item">
           <a class="nav-link" routerLink="/auth">Login</a>
         </li>
         <li class="nav-item" *ngIf="isAuthenticated">

@@ -1,82 +1,44 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-3 details">
-      <div class="img">
-        <img [src]="coinData?.image?.large" alt="" />
-        <h3 class="text-center" style="font-size: 23px">
-          {{ coinData?.name }}
-        </h3>
-
-        <div class="more-detail">
-          <span class="title">Rank: </span>
-          <span class="value">{{ coinData?.market_cap_rank }}</span
-          ><br />
-          <span class="title">Current Price: </span>
-          <span class="value">{{
-            coinData?.market_data.current_price.eur | currency : currency
-          }}</span
-          ><br />
-          <span class="title">Market Cap: </span>
-          <span class="value">{{
-            coinData?.market_data.market_cap.eur | currency : currency
-          }}</span>
-        </div>
+<div class="bundle">
+  <div class="col-md-2 coinData">
+    <div class="img">
+      <img [src]="coinData?.image?.large" alt="" />
+      <h3 class="text-center" style="font-size: 35px">
+        {{ coinData?.name }}
+      </h3>
+      <div class="more-detail">
+        <span class="title">Rank: </span>
+        <span class="value">{{ coinData?.market_cap_rank }}</span
+        ><br />
+        <span class="title">Current Price: </span>
+        <span class="value">{{
+          coinData?.market_data.current_price.eur | currency : currency
+        }}</span>
+        <br />
+        <span class="title">Market Cap: </span>
+        <span class="value">{{
+          coinData?.market_data.market_cap.eur | currency : currency
+        }}</span>
       </div>
     </div>
-    <!-- crypto-depth.component.html -->
-    <div
-      style="
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 400px;
-      "
+  </div>
+  <div>
+    <canvas
+      id="crypto-depth"
+      baseChart
+      [datasets]="depthData"
+      chartType="line"
+      [options]="chartOptions"
     >
-      <canvas
-        baseChart
-        [datasets]="depthData"
-        chartType="horizontalBar"
-        [options]="{
-          scales: {
-            xAxes: [
-              {
-                stacked: false,
-                ticks: { display: false },
-                gridLines: { display: false }
-              }
-            ],
-            yAxes: [
-              {
-                stacked: false,
-                ticks: { display: false },
-                gridLines: { display: false }
-              }
-            ]
-          },
-          legend: { display: false },
-          tooltips: { enabled: false }
-        }"
-      >
-      </canvas>
-    </div>
+    </canvas>
+  </div>
+</div>
+<div class="col-md-8">
+  <canvas #chart></canvas>
 
-    <div class="col-md-8">
-      <canvas #chart></canvas>
-
-      <div class="d-flex justify-content-around">
-        <button (click)="getGraphData(1)" class="btn btn-custom">
-          24 hours
-        </button>
-        <button (click)="getGraphData(30)" class="btn btn-custom">
-          30 days
-        </button>
-        <button (click)="getGraphData(90)" class="btn btn-custom">
-          90 days
-        </button>
-        <button (click)="getGraphData(365)" class="btn btn-custom">
-          1 year
-        </button>
-      </div>
-    </div>
+  <div class="d-flex justify-content-around">
+    <button (click)="getGraphData(1)" class="btn btn-custom">24 hours</button>
+    <button (click)="getGraphData(30)" class="btn btn-custom">30 days</button>
+    <button (click)="getGraphData(90)" class="btn btn-custom">90 days</button>
+    <button (click)="getGraphData(365)" class="btn btn-custom">1 year</button>
   </div>
 </div>
