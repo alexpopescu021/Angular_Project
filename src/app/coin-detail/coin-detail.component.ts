@@ -7,7 +7,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Chart } from 'chart.js';
+import { Chart, ChartDataset } from 'chart.js';
 import 'chartjs-adapter-luxon';
 import {
   CandlestickController,
@@ -32,6 +32,10 @@ export class CoinDetailComponent implements OnInit, OnDestroy, AfterViewInit {
   coinId!: string;
   days: number = 30;
   currency: string = 'EUR';
+  bids: any[] = [];
+  asks: any[] = [];
+
+  depthData: ChartDataset[] = [];
 
   constructor(
     private api: ApiService,
@@ -46,6 +50,7 @@ export class CoinDetailComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.generateRandomOrders();
     this.activatedRoute.params.subscribe((val) => {
       this.coinId = val['id'];
       this.getCoinData();
@@ -53,6 +58,32 @@ export class CoinDetailComponent implements OnInit, OnDestroy, AfterViewInit {
     this.currencyService.getCurrency().subscribe((val) => {
       this.currency = val;
       this.updateChartData();
+    });
+  }
+
+  generateRandomOrders(): void {
+    for (let i = 0; i < 10; i++) {
+      let bidPrice = Number((Math.random() * 5000 + 5000).toFixed(2));
+      let askPrice = Number((Math.random() * 5000 + 10000).toFixed(2));
+      let amount = Number((Math.random() * 5).toFixed(2));
+      this.bids.push({ price: bidPrice, amount });
+      this.asks.push({ price: askPrice, amount });
+    }
+    // Sort bids in descending order and asks in ascending order
+    this.bids.sort((a, b) => b.price - a.price);
+    this.asks.sort((a, b) => a.price - b.price);
+    // Add to depthData
+    this.bids.forEach((bid, i) => {
+      this.depthData.push({
+        data: [{ x: bid.price, y: bid.amount }],
+        backgroundColor: 'green',
+      });
+    });
+    this.asks.forEach((ask, i) => {
+      this.depthData.push({
+        data: [{ x: ask.price, y: ask.amount }],
+        backgroundColor: 'red',
+      });
     });
   }
 

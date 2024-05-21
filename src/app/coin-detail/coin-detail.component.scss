@@ -20,13 +20,8 @@
 
 .img {
   background: transparent;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  img {
-    margin: auto;
-    display: flex;
-  }
+  height: 100px;
+  width: 100px;
 }
 
 .more-detail {
@@ -62,4 +57,36 @@
 
 * {
   color: #fff;
+}
+
+// deph
+
+.depth-chart {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bids,
+.asks {
+  width: 50%;
+}
+
+.order {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1em;
+}
+
+.price {
+  color: white;
+  padding: 0.5em;
+  text-align: right;
+}
+
+.bids .price {
+  background-color: green;
+}
+
+.asks .price {
+  background-color: red;
 }
