@@ -1,12 +1,16 @@
 import { Component } from '@angular/core';
 import { Chart } from 'chart.js';
+
 const colorMap = {
   BTC: 'gold',
   ETH: 'grey',
   ADA: 'RoyalBlue',
   BNB: 'yellow',
+  DOGE: 'lightblue',
+  LTC: 'silver',
   // Add more as needed
 };
+
 @Component({
   selector: 'app-portofolio-chart',
   templateUrl: './portofolio-chart.component.html',
@@ -27,20 +31,25 @@ export class PortofolioChartComponent {
     this.pieChart = new Chart(ctx, {
       type: 'pie',
       data: {
-        labels: ['BTC', 'ETH', 'BNB', 'ADA'], // Cryptos in portfolio
+        labels: ['BTC', 'ETH', 'BNB', 'ADA', 'DOGE', 'LTC'], // Cryptos in portfolio
         datasets: [
           {
             label: 'Portfolio',
-            data: [40, 30, 20, 10], // Portfolio distribution
-            backgroundColor: ['gold', 'grey', 'yellow', 'RoyalBlue'],
-            borderColor: 'pink',
+            data: [40, 30, 20, 10, 5, 15], // Portfolio distribution
+            backgroundColor: Object.values(colorMap),
+            borderColor: 'white',
             borderWidth: 1,
-            // Other options...
           },
         ],
       },
       options: {
-        // Options...
+        plugins: {
+          legend: {
+            labels: {
+              color: 'white', // changes the legend color
+            },
+          },
+        },
       },
     });
   }

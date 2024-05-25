@@ -4,7 +4,12 @@
   id="navbar-top"
 >
   <div class="container-fluid">
-    <a class="navbar-brand active" routerLink="/dashboard">Navbar</a>
+    <a
+      class="navbar-brand active"
+      style="font-weight: bolder"
+      routerLink="/dashboard"
+      >Crypto Chkr</a
+    >
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
@@ -13,19 +18,19 @@
         <li class="nav-item">
           <a routerLink="transactions" class="nav-link"> Transactions </a>
         </li>
-        <div class="dropdown" dropdown>
-          <button
+        <div class="dropdown nav-item" dropdown>
+          <a
             aria-expanded="false"
             aria-haspopup="true"
-            class="btn btn-secondary dropdown-toggle dropdown-toggle"
+            style="color: white"
+            class="nav-link dropdown-toggle dropdown-toggle"
             data-toggle="dropdown"
             dropdownToggle
             id="dropdownMenuButton"
             type="button"
-            *ngIf="isAuthenticated"
           >
             Supported currencies
-          </button>
+          </a>
           <div
             aria-labelledby="dropdownMenuButton"
             class="dropdown-menu"

@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { Chart } from 'chart.js';
+
 const colorMap = {
-  BTC: 'gold',
-  ETH: 'grey',
-  ADA: 'RoyalBlue',
-  BNB: 'yellow',
+  '1D': 'gold',
+  '7D': 'grey',
+  '1M': 'RoyalBlue',
   // Add more as needed
 };
+
 @Component({
   selector: 'app-profit-chart',
   templateUrl: './profit-chart.component.html',
@@ -40,14 +41,41 @@ export class ProfitChartComponent {
               '7D': [5, 7, 6, 8, 9, 7, 6], // Daily profit for 7 days
               '1M': [5, 7, 6, 8], // Weekly profit for 1 month
             }[this.selectedTimePeriod],
-            borderColor: '#e44cc4',
+            borderColor: colorMap[this.selectedTimePeriod],
             borderWidth: 2,
             // Other options...
           },
         ],
       },
       options: {
-        // Options...
+        scales: {
+          x: {
+            ticks: {
+              color: 'white', // changes the x-axis label color
+            },
+            grid: {
+              color: 'rgba(255, 255, 255, 0.1)', // changes the x-axis grid line color
+            },
+          },
+          y: {
+            ticks: {
+              color: 'white', // changes the y-axis label color
+              callback: function (value, index, ticks) {
+                return '$' + value;
+              },
+            },
+            grid: {
+              color: 'rgba(255, 255, 255, 0.1)', // changes the y-axis grid line color
+            },
+          },
+        },
+        plugins: {
+          legend: {
+            labels: {
+              color: 'white', // changes the legend color
+            },
+          },
+        },
       },
     });
   }

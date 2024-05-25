@@ -55,11 +55,65 @@ export class TransactionsComponent implements OnInit {
   }
 
   loadTransactions() {
-    var data = this.transactionService
-      .GetAllTransactions()
-      .subscribe((data: {}) => {
+    this.transactionService.GetAllTransactions().subscribe(
+      (data: {}) => {
         this.TransactionsList = data;
-      });
-    return data;
+      },
+      (error) => {
+        console.error('Error:', error);
+        this.seedData();
+      }
+    );
+  }
+
+  seedData() {
+    this.TransactionsList = [
+      {
+        username: 'User1',
+        sourceCurrencyCode: 'USD',
+        targetCurrencyCode: 'BTC',
+        transactionDate: new Date(),
+        sourcePrice: 50000,
+        targetPrice: 1,
+        conversionRate: 50000,
+      },
+      {
+        username: 'User2',
+        sourceCurrencyCode: 'BTC',
+        targetCurrencyCode: 'ETH',
+        transactionDate: new Date(),
+        sourcePrice: 1,
+        targetPrice: 30,
+        conversionRate: 30,
+      },
+      {
+        username: 'User3',
+        sourceCurrencyCode: 'ETH',
+        targetCurrencyCode: 'USD',
+        transactionDate: new Date(),
+        sourcePrice: 30,
+        targetPrice: 1500,
+        conversionRate: 50,
+      },
+      {
+        username: 'User4',
+        sourceCurrencyCode: 'BNB',
+        targetCurrencyCode: 'BTC',
+        transactionDate: new Date(),
+        sourcePrice: 10,
+        targetPrice: 0.2,
+        conversionRate: 0.02,
+      },
+      {
+        username: 'User5',
+        sourceCurrencyCode: 'ADA',
+        targetCurrencyCode: 'ETH',
+        transactionDate: new Date(),
+        sourcePrice: 100,
+        targetPrice: 2,
+        conversionRate: 0.02,
+      },
+      // ... add more seeded transactions as needed ...
+    ];
   }
 }
