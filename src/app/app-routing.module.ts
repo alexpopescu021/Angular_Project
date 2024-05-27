@@ -5,6 +5,7 @@ import { CoinDetailComponent } from './coin-detail/coin-detail.component';
 import { CoinListComponent } from './coin-list/coin-list.component';
 import { ConversionComponent } from './conversion/conversion.component';
 import { DashComponent } from './dash/dash.component';
+import { LandingComponent } from './landing/landing.component';
 import { NewTransactionComponent } from './new-transaction/new-transaction.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SupportedCryptoComponent } from './supported-crypto/supported-crypto.component';
@@ -22,9 +23,10 @@ const routes: Routes = [
   { path: 'conversion', component: ConversionComponent },
   { path: 'auth', component: AuthComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: '', redirectTo: 'coin-list', pathMatch: 'full' },
+  { path: '', redirectTo: 'landing', pathMatch: 'full' },
   { path: 'coin-list', component: CoinListComponent },
   { path: 'coin-detail/:id', component: CoinDetailComponent },
+  { path: 'landing', component: LandingComponent },
 ];
 
 @NgModule({

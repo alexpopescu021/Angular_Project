@@ -42,6 +42,7 @@ import { PortofolioChartComponent } from './charts/portofolio-chart/portofolio-c
 import { CoinDetailComponent } from './coin-detail/coin-detail.component';
 import { CoinListComponent } from './coin-list/coin-list.component';
 import { FooterComponent } from './footer/footer.component';
+import { LandingComponent } from './landing/landing.component';
 import { UserComponent } from './user/user.component';
 
 @NgModule({
@@ -66,6 +67,7 @@ import { UserComponent } from './user/user.component';
     FooterComponent,
     CoinListComponent,
     CoinDetailComponent,
+    LandingComponent,
   ],
   imports: [
     BrowserModule,

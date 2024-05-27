@@ -1,0 +1,30 @@
+<!-- app.component.html -->
+<div class="container">
+  <div class="table-container">
+    <h1>Popular</h1>
+    <table class="table">
+      <tr class="mat-row">
+        <th></th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Change</th>
+      </tr>
+      <tr class="mat-row" *ngFor="let crypto of cryptos">
+        <td class="mat-cell">
+          <img [src]="crypto.logo" alt="{{ crypto.name }} Logo" />
+        </td>
+        <td class="mat-cell">{{ crypto.name }}</td>
+        <td class="mat-cell">{{ crypto.price }}</td>
+        <td
+          class="mat-cell"
+          [ngClass]="{
+            negative: crypto.change < 0,
+            positive: crypto.change >= 0
+          }"
+        >
+          {{ crypto.change }}%
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

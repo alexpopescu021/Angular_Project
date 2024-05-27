@@ -1,0 +1,31 @@
+:host {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+/* app.component.css */
+.container {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.table-container {
+  background-color: #1e1e2a;
+  margin-right: 200px; /* adjust this to move the table closer or further from the right edge */
+  border-radius: 15px; /* gives the table rounded corners */
+  overflow: hidden; /* ensures the rounded corners apply to the table as well */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15); /* gives the table a "popped-up" effect */
+}
+
+table {
+  color: white;
+}
+
+h1 {
+  padding-top: 10px;
+  padding-left: 10px;
+}

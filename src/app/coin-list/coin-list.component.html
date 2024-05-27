@@ -4,12 +4,12 @@
       <h2>Crypto Checker</h2>
     </div>
     <div class="sub-header">
-      <carousel behavior="scroll" loop="infinite" direction="left">
+      <div class="container">
         <div class="row">
           <ng-container *ngFor="let row of bannerData">
-            <div class="col-1" (click)="gotoDetails(row)">
-              <div class="card">
-                <img [src]="row.image" width="100" class="img-fluid" alt="" />
+            <div class="col" (click)="gotoDetails(row)">
+              <div class="card mb-4 shadow-sm">
+                <img [src]="row.image" width="100%" class="img-fluid" alt="" />
                 <div class="card-body">
                   <h5 class="card-title">
                     {{ row.symbol | uppercase }}
@@ -22,7 +22,6 @@
                   >
                     {{ row.market_cap_change_percentage_24h }}%
                   </span>
-
                   <p class="card-text">
                     {{ row.current_price | currency : currency }}
                   </p>
@@ -31,7 +30,7 @@
             </div>
           </ng-container>
         </div>
-      </carousel>
+      </div>
     </div>
   </div>
 </div>

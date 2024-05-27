@@ -1,9 +1,18 @@
 <div class="main-container">
   <navbar></navbar>
-  <div class="main-content">
-    <br /><br /><br /><br /><br />
-    <router-outlet></router-outlet>
-    <br /><br />
-    <app-footer></app-footer>
+  <div class="wrapper">
+    <div>
+      <img class="dots" src="assets/img/dots.png" />
+      <img class="path" src="assets/img/path4.png" />
+      <div class="main-content">
+        <br /><br /><br /><br /><br />
+        <router-outlet></router-outlet>
+        <br /><br />
+        <app-footer></app-footer>
+      </div>
+    </div>
   </div>
 </div>
+<a href="#" class="float">
+  <i class="fa fa-headphones my-float"></i>
+</a>
