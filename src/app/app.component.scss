@@ -29,3 +29,7 @@
 .my-float {
   margin-top: 22px;
 }
+
+.custom-overlay-target {
+  position: relative; /* Ensure positioning context for overlays */
+}

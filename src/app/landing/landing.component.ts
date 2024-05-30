@@ -30,11 +30,13 @@ export class LandingComponent implements OnInit {
   }
   constructor(private api: ApiService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getBannerData();
+  }
 
   getBannerData() {
     this.api.getTrendingCurrency(this.currency).subscribe((res) => {
-      this.bannerData = res;
+      this.bannerData = res.slice(0, 5);
     });
   }
 }

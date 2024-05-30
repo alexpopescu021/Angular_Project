@@ -1,20 +1,43 @@
+<h1>Transaction</h1>
+
 <nav>
   <ul>
-    <li>Transaction</li>
-    <li><a href="conversion">Conversion</a></li>
+    <li class="badge badge-pill badge-primary">Transaction</li>
+    <li class="badge badge-pill badge-primary">
+      <a href="conversion">Conversion</a>
+    </li>
   </ul>
 </nav>
-
 <form>
   <label for="transactionType">Transaction Type:</label>
-  <select id="transactionType">
+  <select
+    id="transactionType"
+    [(ngModel)]="transactionType"
+    name="transactionType"
+  >
+    <option value="BankTransaction">Bank transaction</option>
+    <option value="Card">Card</option>
     <!-- Add options for transaction type dropdown -->
   </select>
 
-  <label for="amount">Amount:</label>
-  <input type="text" id="amount" />
+  <!-- Conditionally display additional input fields -->
+  <div *ngIf="transactionType === 'BankTransaction'">
+    <label for="iban">IBAN:</label>
+    <input type="text" id="iban" [(ngModel)]="iban" name="iban" />
+  </div>
 
-  <!-- Add other input fields as needed -->
+  <div *ngIf="transactionType === 'Card'">
+    <label for="cardNumber">Card Number:</label>
+    <input
+      type="text"
+      id="cardNumber"
+      [(ngModel)]="cardNumber"
+      name="cardNumber"
+    />
+  </div>
+
+  <label for="amount">Amount:</label>
+  <input type="text" id="amount" [(ngModel)]="amount" name="amount" />
 
   <button type="button" (click)="sendTransaction()">Send</button>
 </form>

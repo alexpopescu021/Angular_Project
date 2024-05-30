@@ -1,7 +1,7 @@
 <!-- app.component.html -->
 <div class="container">
   <div class="table-container">
-    <h1>Popular</h1>
+    <h1 style="text-align: center; vertical-align: middle">Popular</h1>
     <table class="table">
       <tr class="mat-row">
         <th></th>
@@ -9,20 +9,20 @@
         <th>Price</th>
         <th>Change</th>
       </tr>
-      <tr class="mat-row" *ngFor="let crypto of cryptos">
+      <tr class="mat-row" *ngFor="let crypto of bannerData">
         <td class="mat-cell">
-          <img [src]="crypto.logo" alt="{{ crypto.name }} Logo" />
+          <img [src]="crypto.image" alt="{{ crypto.symbol }} Logo" />
         </td>
-        <td class="mat-cell">{{ crypto.name }}</td>
-        <td class="mat-cell">{{ crypto.price }}</td>
+        <td class="mat-cell">{{ crypto.symbol }}</td>
+        <td class="mat-cell">{{ crypto.current_price }}</td>
         <td
           class="mat-cell"
           [ngClass]="{
-            negative: crypto.change < 0,
-            positive: crypto.change >= 0
+            'text-danger': crypto.market_cap_change_percentage_24h < 0,
+            'text-success': crypto.market_cap_change_percentage_24h >= 0
           }"
         >
-          {{ crypto.change }}%
+          {{ crypto.market_cap_change_percentage_24h }}%
         </td>
       </tr>
     </table>

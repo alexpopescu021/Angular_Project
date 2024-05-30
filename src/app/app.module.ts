@@ -36,6 +36,7 @@ import { SupportedFiatComponent } from './supported-fiat/supported-fiat.componen
 import { TransactionsComponent } from './transactions/transactions.component';
 import { UserListComponent } from './user-list/user-list.component';
 
+import { OverlayContainer } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { MarketChartComponent } from './charts/market-chart/market-chart.component';
 import { PortofolioChartComponent } from './charts/portofolio-chart/portofolio-chart.component';
@@ -43,6 +44,7 @@ import { CoinDetailComponent } from './coin-detail/coin-detail.component';
 import { CoinListComponent } from './coin-list/coin-list.component';
 import { FooterComponent } from './footer/footer.component';
 import { LandingComponent } from './landing/landing.component';
+import { CustomOverlayContainer } from './pipes/filterItems/custom-overlay-container';
 import { UserComponent } from './user/user.component';
 
 @NgModule({
@@ -95,7 +97,11 @@ import { UserComponent } from './user/user.component';
     LayoutModule,
     NgbModule,
   ],
-  providers: [TransactionService, FilterItemsPipe],
+  providers: [
+    TransactionService,
+    FilterItemsPipe,
+    { provide: OverlayContainer, useClass: CustomOverlayContainer }, // Register custom overlay container
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

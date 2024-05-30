@@ -28,4 +28,23 @@ table {
 h1 {
   padding-top: 10px;
   padding-left: 10px;
+  margin-bottom: 10px !important;
+}
+
+.text-danger {
+  color: red;
+}
+
+.text-success {
+  color: green;
+}
+
+img {
+  height: 50px;
+  width: 50px;
+}
+
+.mat-cell {
+  vertical-align: middle !important;
+  padding: 5px !important;
 }
