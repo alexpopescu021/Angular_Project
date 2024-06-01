@@ -9,14 +9,6 @@
   color: black !important;
 }
 
-form {
-  max-width: 900px;
-  padding: 20px;
-  //border-radius: 10px;
-  //background-color: #fff; /* Light background color */
-  //box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle pop */
-}
-
 label {
   display: block;
   margin-bottom: 8px;
@@ -41,7 +33,7 @@ mat-icon {
   color: #666; /* Adjust color as needed */
 }
 
-button {
+.convert-button {
   width: 100%;
   padding: 10px;
   margin-bottom: 12px;
@@ -56,8 +48,13 @@ button {
   margin-top: 16px; /* Add margin between the form and the button */
 }
 
-button:hover {
+.convert-button:hover {
   background-color: #0b7dda; /* Darker blue color on hover */
+}
+
+li:hover {
+  background-color: #0b7dda; /* Darker blue color on hover */
+  cursor: pointer;
 }
 
 :host ::ng-deep .mat-select-value {
@@ -76,4 +73,26 @@ button:hover {
 
 ul {
   padding: 0px !important;
+  list-style-type: none;
+}
+
+li {
+  text-align: center;
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+
+.modal-content {
+  height: 300px;
+}
+
+.badge a {
+  color: inherit;
+  text-decoration: none;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

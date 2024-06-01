@@ -7,31 +7,122 @@
     <li class="badge badge-pill badge-primary">Conversion</li>
   </ul>
 </nav>
-
+<!-- Currency Converter Form -->
 <form>
   <div class="input-container">
     <label for="fromCurrency">From:</label>
-    <mat-select [(ngModel)]="fromCurrency" id="fromCurrency">
-      <mat-option *ngFor="let currency of currencies" [value]="currency">
-        {{ currency }}
-      </mat-option>
-    </mat-select>
+    <input
+      type="text"
+      id="fromCurrency"
+      [value]="fromCurrency"
+      (click)="openCurrencyModal('from')"
+      readonly
+    />
   </div>
+  Potofolio for {{ fromCurrency }}
 
-  <!-- <div class="swap-icon" (click)="swapCurrencies()">
-    <mat-icon>swap_horiz</mat-icon>
-  </div> -->
+  <a class="swap-button" (click)="swapCurrencies()">
+    <i class="fa-solid fa-retweet fa-xl"></i>
+  </a>
 
   <div class="input-container">
     <label for="toCurrency">To:</label>
-    <mat-select [(ngModel)]="toCurrency" id="toCurrency">
-      <mat-option *ngFor="let currency of currencies" [value]="currency">
-        {{ currency }}
-      </mat-option>
-    </mat-select>
+    <input
+      type="text"
+      id="toCurrency"
+      [value]="toCurrency"
+      (click)="openCurrencyModal('to')"
+      readonly
+    />
   </div>
 
-  <!-- Add other input fields for conversion as needed -->
-
-  <button type="button" (click)="performConversion()">Convert</button>
+  <button type="button" class="convert-button" (click)="performConversion()">
+    Convert
+  </button>
 </form>
+
+<!-- From Currency Selection Modal -->
+<div
+  aria-hidden="true"
+  aria-labelledby="fromCurrencyModalLabel"
+  class="modal fade modal-black"
+  id="fromCurrencyModal"
+  role="dialog"
+  tabindex="-1"
+  [class.show]="isFromModalOpen"
+  [style.display]="isFromModalOpen ? 'block' : 'none'"
+  (scroll)="onModalScroll($event)"
+  (click)="closeCurrencyModal('from')"
+>
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <button
+          aria-hidden="true"
+          class="close"
+          data-dismiss="modal"
+          (click)="closeCurrencyModal('from')"
+          type="button"
+        >
+          <i class="tim-icons icon-simple-remove text-white"></i>
+        </button>
+        <div class="text-muted text-center ml-auto mr-auto">
+          <h3 class="mb-0">Select From Currency</h3>
+        </div>
+      </div>
+      <div class="modal-body">
+        <ul class="currency-list">
+          <li
+            *ngFor="let currency of currencies"
+            (click)="selectCurrency(currency, 'from')"
+          >
+            {{ currency }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- To Currency Selection Modal -->
+<div
+  aria-hidden="true"
+  aria-labelledby="toCurrencyModalLabel"
+  class="modal fade modal-black"
+  id="toCurrencyModal"
+  role="dialog"
+  tabindex="-1"
+  [class.show]="isToModalOpen"
+  [style.display]="isToModalOpen ? 'block' : 'none'"
+  (scroll)="onModalScroll($event)"
+  (click)="closeCurrencyModal('to')"
+>
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <button
+          aria-hidden="true"
+          class="close"
+          data-dismiss="modal"
+          (click)="closeCurrencyModal('to')"
+          type="button"
+        >
+          <i class="tim-icons icon-simple-remove text-white"></i>
+        </button>
+        <div class="text-muted text-center ml-auto mr-auto">
+          <h3 class="mb-0">Select to Currency</h3>
+        </div>
+      </div>
+      <div class="modal-body">
+        <ul class="currency-list">
+          <li
+            *ngFor="let currency of currencies"
+            (click)="selectCurrency(currency, 'to')"
+          >
+            {{ currency }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

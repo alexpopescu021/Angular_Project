@@ -13,7 +13,7 @@
         <td class="mat-cell">
           <img [src]="crypto.image" alt="{{ crypto.symbol }} Logo" />
         </td>
-        <td class="mat-cell">{{ crypto.symbol }}</td>
+        <td class="mat-cell">{{ crypto.symbol | uppercase }}</td>
         <td class="mat-cell">{{ crypto.current_price }}</td>
         <td
           class="mat-cell"
