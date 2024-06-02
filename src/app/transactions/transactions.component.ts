@@ -11,11 +11,6 @@ export class TransactionsComponent implements OnInit {
   TransactionsList: any = [];
   columns = [
     {
-      columnDef: 'username',
-      header: 'Username',
-      cell: (element: Transaction) => `${element.username}`,
-    },
-    {
       columnDef: 'sourceCurrencyCode',
       header: 'SourceCurrency',
       cell: (element: Transaction) => `${element.sourceCurrencyCode}`,
@@ -69,7 +64,6 @@ export class TransactionsComponent implements OnInit {
   seedData() {
     this.TransactionsList = [
       {
-        username: 'User1',
         sourceCurrencyCode: 'USD',
         targetCurrencyCode: 'BTC',
         transactionDate: new Date(),
@@ -78,7 +72,6 @@ export class TransactionsComponent implements OnInit {
         conversionRate: 50000,
       },
       {
-        username: 'User2',
         sourceCurrencyCode: 'BTC',
         targetCurrencyCode: 'ETH',
         transactionDate: new Date(),
@@ -87,7 +80,6 @@ export class TransactionsComponent implements OnInit {
         conversionRate: 30,
       },
       {
-        username: 'User3',
         sourceCurrencyCode: 'ETH',
         targetCurrencyCode: 'USD',
         transactionDate: new Date(),
@@ -96,7 +88,6 @@ export class TransactionsComponent implements OnInit {
         conversionRate: 50,
       },
       {
-        username: 'User4',
         sourceCurrencyCode: 'BNB',
         targetCurrencyCode: 'BTC',
         transactionDate: new Date(),
@@ -105,7 +96,6 @@ export class TransactionsComponent implements OnInit {
         conversionRate: 0.02,
       },
       {
-        username: 'User5',
         sourceCurrencyCode: 'ADA',
         targetCurrencyCode: 'ETH',
         transactionDate: new Date(),

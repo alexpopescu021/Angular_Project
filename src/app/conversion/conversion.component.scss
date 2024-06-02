@@ -27,6 +27,10 @@ label {
   cursor: pointer;
 }
 
+.swap-button {
+  padding-bottom: 20px;
+}
+
 /* Styles for the swap icon */
 mat-icon {
   font-size: 24px;
@@ -35,11 +39,11 @@ mat-icon {
 
 .convert-button {
   width: 100%;
+  max-width: 158px; /* Adjust as needed */
   padding: 10px;
   margin-bottom: 12px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  align-self: flex-end; /* Align button to the right */
   background-color: #2196f3; /* Blue color for the "Convert" button */
   color: #fff;
   border: none;
@@ -106,4 +110,27 @@ form {
 
 .text-red {
   color: red;
+}
+
+.validation-error {
+  color: red;
+  margin-bottom: 1rem;
+  width: 100%; /* Ensure it takes full width to avoid affecting other elements */
+}
+
+.custom-disabled {
+  cursor: pointer; /* Set cursor style */
+  color: white;
+  background-color: #1a1e45;
+}
+
+.input-group {
+  width: 250px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

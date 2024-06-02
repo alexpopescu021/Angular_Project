@@ -9,43 +9,160 @@
 </nav>
 <!-- Currency Converter Form -->
 <form>
-  <div class="input-container">
-    <label for="fromCurrency">From:</label>
-    <input
-      type="text"
-      id="fromCurrency"
-      [value]="fromCurrency"
-      (click)="openCurrencyModal('from')"
-      readonly
-    />
+  <label for="fromCurrency">From:</label>
+  <div class="input-group mb-3" style="max-width: 100%">
+    <div class="row no-gutters" style="width: 100%">
+      <div class="col-3">
+        <input
+          type="text"
+          id="fromCurrency"
+          class="form-control custom-disabled"
+          [value]="fromCurrency"
+          (click)="openCurrencyModal('from'); focusInputs()"
+          readonly
+          #currencyInput
+        />
+      </div>
+      <div class="col-9">
+        <input
+          type="number"
+          id="amount"
+          class="form-control focused"
+          (click)="focusInputs(); clearAmount()"
+          [(ngModel)]="amount"
+          (ngModelChange)="validateAmount()"
+          min="0"
+          name="amount"
+          inputmode="numeric"
+          #amountInput
+        />
+      </div>
+    </div>
   </div>
-  <div [ngClass]="{ 'text-red': isValueZero() }" style="color: white">
+
+  <div *ngIf="isAmountInvalid" class="validation-error">
+    The amount cannot exceed the portfolio value of {{ value }}
+    {{ fromCurrency }}.
+  </div>
+  <div
+    *ngIf="!isAmountInvalid"
+    [ngClass]="{ 'text-red': isValueZero() }"
+    style="color: white"
+  >
     Portfolio for {{ fromCurrency }} is {{ value }}
   </div>
+  <br />
   <a class="swap-button" (click)="swapCurrencies()">
     <i class="fa-solid fa-retweet fa-xl"></i>
   </a>
-
-  <div class="input-container">
-    <label for="toCurrency">To:</label>
-    <input
-      type="text"
-      id="toCurrency"
-      [value]="toCurrency"
-      (click)="openCurrencyModal('to')"
-      readonly
-    />
+  <div class="input-group mb-3" style="max-width: 100%">
+    <div class="row no-gutters" style="width: 100%">
+      <div class="col-3">
+        <input
+          type="text"
+          id="toCurrency"
+          class="form-control custom-disabled"
+          [value]="toCurrency"
+          (click)="openCurrencyModal('to')"
+          readonly
+          #currencyInput
+        />
+      </div>
+      <div class="col-9">
+        <input
+          type="number"
+          id="amount"
+          class="form-control"
+          (click)="focusInputs()"
+          [(ngModel)]="toAmount"
+          (ngModelChange)="validateAmount()"
+          min="0"
+          name="toAmount"
+          inputmode="numeric"
+          #amountInput
+          readonly
+        />
+      </div>
+    </div>
   </div>
 
   <button
     type="button"
     class="convert-button"
-    (click)="performConversion()"
-    [disabled]="isValueZero()"
+    (click)="openConfirmationModal()"
+    [disabled]="isValueZero() || isAmountInvalid"
   >
     Convert
   </button>
 </form>
+
+<!-- Confirmation Modal -->
+<div
+  aria-hidden="true"
+  aria-labelledby="confirmationModalLabel"
+  class="modal fade modal-black"
+  id="confirmationModal"
+  role="dialog"
+  tabindex="-1"
+  [class.show]="showConfirmation"
+  [style.display]="showConfirmation ? 'block' : 'none'"
+>
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <button
+          aria-hidden="true"
+          class="close"
+          data-dismiss="modal"
+          (click)="cancelConversion()"
+          type="button"
+        >
+          <i class="tim-icons icon-simple-remove text-white"></i>
+        </button>
+        <div class="text-muted text-center ml-auto mr-auto">
+          <h3 class="mb-0">Confirmation</h3>
+        </div>
+      </div>
+      <div class="modal-body">
+        <p>
+          Are you sure you want to convert {{ amount }} {{ fromCurrency }} to
+          {{ toAmount }} {{ toCurrency }}?
+        </p>
+        <p>
+          Conversion Fee: 1 {{ fromCurrency }}
+          <button
+            type="button"
+            class="btn btn-link p-0"
+            container="body"
+            placement="right"
+            data-toggle="tooltip"
+            data-placement="top"
+            ngbPopover="This is the commission for the transaction."
+          >
+            <i class="fas fa-question-circle"></i>
+          </button>
+        </p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="confirmConversion()"
+        >
+          Confirm
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+          (click)="cancelConversion()"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- From Currency Selection Modal -->
 <div

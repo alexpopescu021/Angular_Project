@@ -73,19 +73,21 @@ export class SupportedFiatComponent implements OnInit {
   }
 
   saveData() {
-    this.supportedService.saveSupported(this.rightList, 'fiat').subscribe({
-      next: () => {
-        console.log('Data saved successfully');
-        // Display success snackbar
-        this.snackbarService.open('Data saved successfully', 'Close', 3000, [
-          'success-snackbar',
-        ]);
-      },
-      error: (error) => {
-        console.error('Error saving data:', error);
-        // Handle error here if needed
-      },
-    });
+    this.supportedService
+      .saveSupported(this.filteredRightList, 'fiat')
+      .subscribe({
+        next: () => {
+          console.log('Data saved successfully');
+          // Display success snackbar
+          this.snackbarService.open('Data saved successfully', 'Close', 3000, [
+            'success-snackbar',
+          ]);
+        },
+        error: (error) => {
+          console.error('Error saving data:', error);
+          // Handle error here if needed
+        },
+      });
   }
 
   moveItem(item: string, direction: 'left' | 'right') {

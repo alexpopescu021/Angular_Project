@@ -35,16 +35,16 @@ export class SupportedCryptoComponent implements OnInit {
 
   public loadCryptoContainer() {
     this.supportedService.getAllCrypto().subscribe((data) => {
-      Object.entries(data).forEach(([key, value]) => {
-        this.leftList.push(`${key}: ${value}`);
+      Object.entries(data).forEach(([_, value]) => {
+        this.leftList.push(`${value}`);
       });
       this.leftList.sort();
       this.filteredLeftList = this.leftList; // Initially, both lists are the same
     });
 
     this.currenciesService.getSupportedCrypto().subscribe((data) => {
-      Object.entries(data).forEach(([, value]) => {
-        const currencyValue = value as { currencyCode: string };
+      Object.keys(data).forEach((key) => {
+        const currencyValue = data[key] as { currencyCode: string };
         if (currencyValue.currencyCode) {
           this.rightList.push(currencyValue.currencyCode);
         }
@@ -73,19 +73,21 @@ export class SupportedCryptoComponent implements OnInit {
   }
 
   saveData() {
-    this.supportedService.saveSupported(this.rightList, 'crypto').subscribe({
-      next: () => {
-        console.log('Data saved successfully');
-        // Display success snackbar
-        this.snackbarService.open('Data saved successfully', 'Close', 3000, [
-          'success-snackbar',
-        ]);
-      },
-      error: (error) => {
-        console.error('Error saving data:', error);
-        // Handle error here if needed
-      },
-    });
+    this.supportedService
+      .saveSupported(this.filteredRightList, 'crypto')
+      .subscribe({
+        next: () => {
+          console.log('Data saved successfully');
+          // Display success snackbar
+          this.snackbarService.open('Data saved successfully', 'Close', 3000, [
+            'success-snackbar',
+          ]);
+        },
+        error: (error) => {
+          console.error('Error saving data:', error);
+          // Handle error here if needed
+        },
+      });
   }
 
   moveItem(item: string, direction: 'left' | 'right') {

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Transaction } from '../models/transaction.model';
 
@@ -23,5 +23,27 @@ export class TransactionService {
     return this.http.get<any>(
       this.baseApiUrl + `/Transactions/currency/${currency}`
     );
+  }
+
+  GetConvertedAmount(
+    from: string,
+    to: string,
+    amount: number | undefined
+  ): Observable<number> {
+    return this.http.get<number>(
+      this.baseApiUrl + `/Transactions/convert/${from}/${to}/${amount}`
+    );
+  }
+
+  Convert(value: any): Observable<number> {
+    return this.http
+      .post<number>(`${this.baseApiUrl}/Transactions/convert`, value)
+      .pipe(
+        catchError((error: any) => {
+          // Handle errors here
+          console.error('Error:', error);
+          throw error; // Rethrow the error to propagate it
+        })
+      );
   }
 }

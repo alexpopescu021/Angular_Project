@@ -19,10 +19,17 @@ export class SupportedService {
   }
 
   saveSupported(currencies: string[], currencyType: string): Observable<any> {
+    // Remove everything before the comma
+    const modifiedCurrencies = currencies.map((currency) => {
+      const index = currency.indexOf(':');
+      return index !== -1 ? currency.substring(index + 1).trim() : currency;
+    });
+
     const data = {
-      currencies: currencies,
+      currencies: modifiedCurrencies,
       currencyType: currencyType,
     };
+
     return this.http.post<any>(`${this.baseApiUrl}/Admin/addcurr`, data).pipe(
       catchError((error) => {
         console.error('HTTP Error:', error);
