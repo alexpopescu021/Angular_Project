@@ -18,4 +18,10 @@ export class TransactionService {
   GetAllCoins(): Observable<any> {
     return this.http.get<any>(this.baseApiUrl + '/Currencies/');
   }
+
+  GetBalanceOfCurrency(currency: string): Observable<any> {
+    return this.http.get<any>(
+      this.baseApiUrl + `/Transactions/currency/${currency}`
+    );
+  }
 }

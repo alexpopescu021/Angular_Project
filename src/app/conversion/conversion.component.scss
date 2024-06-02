@@ -48,6 +48,13 @@ mat-icon {
   margin-top: 16px; /* Add margin between the form and the button */
 }
 
+.convert-button:disabled {
+  background-color: #e0e0e0; /* Light grey background */
+  color: #a0a0a0; /* Grey text color */
+  cursor: not-allowed; /* Change cursor to not-allowed */
+  border: 1px solid #ccc; /* Maintain border */
+}
+
 .convert-button:hover {
   background-color: #0b7dda; /* Darker blue color on hover */
 }
@@ -95,4 +102,8 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.text-red {
+  color: red;
 }

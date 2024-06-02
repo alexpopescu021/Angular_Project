@@ -19,8 +19,9 @@
       readonly
     />
   </div>
-  Potofolio for {{ fromCurrency }}
-
+  <div [ngClass]="{ 'text-red': isValueZero() }" style="color: white">
+    Portfolio for {{ fromCurrency }} is {{ value }}
+  </div>
   <a class="swap-button" (click)="swapCurrencies()">
     <i class="fa-solid fa-retweet fa-xl"></i>
   </a>
@@ -36,7 +37,12 @@
     />
   </div>
 
-  <button type="button" class="convert-button" (click)="performConversion()">
+  <button
+    type="button"
+    class="convert-button"
+    (click)="performConversion()"
+    [disabled]="isValueZero()"
+  >
     Convert
   </button>
 </form>

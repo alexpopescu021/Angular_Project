@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { TransactionService } from '../services/transaction.service';
 
 @Component({
   selector: 'app-conversion',
@@ -37,12 +38,15 @@ export class ConversionComponent implements OnInit {
 
   isFromModalOpen: boolean = false;
   isToModalOpen: boolean = false;
-
+  value: number = 0;
   private batchSize: number = 5;
   private fromCursor: number = 0;
   private toCursor: number = 0;
 
+  constructor(private transService: TransactionService) {}
+
   ngOnInit() {
+    this.getBalance(this.fromCurrency);
     this.loadMoreCurrencies('from');
     this.loadMoreCurrencies('to');
   }
@@ -79,6 +83,7 @@ export class ConversionComponent implements OnInit {
     } else {
       this.toCurrency = currency;
     }
+    this.getBalance(this.fromCurrency);
     this.closeCurrencyModal(type);
   }
 
@@ -115,10 +120,18 @@ export class ConversionComponent implements OnInit {
     }
   }
 
-  constructor() {}
-
   @HostListener('scroll', ['$event'])
   onModalScroll(event: Event) {
     event.stopPropagation();
+  }
+
+  private getBalance(currency: string) {
+    this.transService.GetBalanceOfCurrency(currency).subscribe((res) => {
+      this.value = res || 0; // Set to 0 if no value is returned
+    });
+  }
+
+  isValueZero(): boolean {
+    return this.value === 0;
   }
 }
