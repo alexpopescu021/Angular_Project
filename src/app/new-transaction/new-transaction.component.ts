@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SnackbarService } from '../services/snackbar.service';
 
 @Component({
   selector: 'app-new-transaction',
@@ -11,6 +12,10 @@ export class NewTransactionComponent {
   iban: string = '';
   cardNumber: string = '';
 
+  /**
+   *
+   */
+  constructor(private snackbarService: SnackbarService) {}
   onTransactionTypeChange() {
     // Clear the additional input fields when the transaction type changes
     this.iban = '';

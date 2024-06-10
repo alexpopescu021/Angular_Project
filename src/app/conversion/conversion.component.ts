@@ -5,6 +5,10 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { finalize, forkJoin } from 'rxjs';
+import { LoadingService } from '../services/loading.service';
+import { SnackbarService } from '../services/snackbar.service';
+import { SupportedService } from '../services/supported.service';
 import { TransactionService } from '../services/transaction.service';
 
 @Component({
@@ -13,31 +17,9 @@ import { TransactionService } from '../services/transaction.service';
   styleUrls: ['./conversion.component.scss'],
 })
 export class ConversionComponent implements OnInit {
-  fromCurrency: string = 'USD';
-  toCurrency: string = 'BTC';
-  currencies: string[] = [
-    'USD',
-    'EUR',
-    'BTC',
-    'JPY',
-    'CAD',
-    'AUD',
-    'CHF',
-    'CNY',
-    'SEK',
-    'NZD',
-    'MXN',
-    'SGD',
-    'HKD',
-    'NOK',
-    'KRW',
-    'TRY',
-    'RUB',
-    'INR',
-    'BRL',
-    'ZAR',
-    // Add more currencies as needed
-  ];
+  fromCurrency: string = '';
+  toCurrency: string = '';
+  currencies: string[] = [];
 
   displayedCurrenciesFrom: string[] = [];
   displayedCurrenciesTo: string[] = [];
@@ -56,13 +38,38 @@ export class ConversionComponent implements OnInit {
   private fromCursor: number = 0;
   private toCursor: number = 0;
 
-  constructor(private transactionService: TransactionService) {}
+  constructor(
+    private transactionService: TransactionService,
+    private supportedService: SupportedService,
+    private loadingService: LoadingService,
+    private snackbarService: SnackbarService
+  ) {}
 
   ngOnInit() {
     this.amount = 0;
+    this.getMergedSupportedCurrencies();
     this.getBalance(this.fromCurrency);
     this.loadMoreCurrencies('from');
     this.loadMoreCurrencies('to');
+  }
+
+  getMergedSupportedCurrencies() {
+    forkJoin({
+      fiat: this.supportedService.getSupportedFiat(),
+      crypto: this.supportedService.getSupportedCrypto(),
+    }).subscribe(
+      ({ fiat, crypto }) => {
+        this.currencies = [...fiat, ...crypto].map(
+          (currency) => currency.currencyCode
+        );
+        this.toCurrency = this.currencies[0];
+        this.fromCurrency = this.currencies[1];
+        console.log('Currency Codes:', this.currencies);
+      },
+      (error) => {
+        console.error('Error fetching data', error);
+      }
+    );
   }
 
   swapCurrencies() {
@@ -93,6 +100,10 @@ export class ConversionComponent implements OnInit {
     this.transactionService.Convert(conversionDto).subscribe({
       next: (result: number) => {
         console.log('Conversion successful:', result);
+        this.getBalance(this.fromCurrency);
+        this.snackbarService.open('Converted succesfully', 'Close', 3000, [
+          'success-snackbar',
+        ]);
         // Handle the result here if needed
       },
       error: (error: any) => {
@@ -177,10 +188,20 @@ export class ConversionComponent implements OnInit {
   }
 
   private getBalance(currency: string) {
-    this.transactionService.GetBalanceOfCurrency(currency).subscribe((res) => {
-      this.value = res || 0; // Set to 0 if no value is returned
-      this.validateAmount(); // Re-validate the amount when the portfolio value changes
-    });
+    this.loadingService.loadingOn();
+    this.transactionService
+      .GetBalanceOfCurrency(currency)
+      .pipe(finalize(() => this.loadingService.loadingOff()))
+      .subscribe({
+        next: (res) => {
+          this.value = res || 0; // Set to 0 if no value is returned
+          this.validateAmount(); // Re-validate the amount when the portfolio value changes
+        },
+        error: (err) => {
+          console.error('Error fetching balance:', err);
+          // Handle error message if needed
+        },
+      });
   }
 
   isValueZero(): boolean {

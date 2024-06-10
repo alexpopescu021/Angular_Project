@@ -45,6 +45,7 @@ import { CoinListComponent } from './coin-list/coin-list.component';
 import { FooterComponent } from './footer/footer.component';
 import { LandingComponent } from './landing/landing.component';
 import { CustomOverlayContainer } from './pipes/filterItems/custom-overlay-container';
+import { LoadingService } from './services/loading.service';
 import { UserComponent } from './user/user.component';
 
 @NgModule({
@@ -64,7 +65,6 @@ import { UserComponent } from './user/user.component';
     NewTransactionComponent,
     ConversionComponent,
     AuthComponent,
-    LoadingSpinnerComponent,
     ProfileComponent,
     FooterComponent,
     CoinListComponent,
@@ -74,6 +74,7 @@ import { UserComponent } from './user/user.component';
   imports: [
     BrowserModule,
     CommonModule,
+    LoadingSpinnerComponent,
     NgbDropdownModule,
     BrowserAnimationsModule,
     RouterModule,
@@ -99,8 +100,9 @@ import { UserComponent } from './user/user.component';
   ],
   providers: [
     TransactionService,
+    LoadingService,
     FilterItemsPipe,
-    { provide: OverlayContainer, useClass: CustomOverlayContainer }, // Register custom overlay container
+    { provide: OverlayContainer, useClass: CustomOverlayContainer },
   ],
   bootstrap: [AppComponent],
 })

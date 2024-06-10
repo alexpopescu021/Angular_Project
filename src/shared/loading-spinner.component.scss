@@ -1,12 +1,27 @@
+/* spinner-container styles in styles.scss or a global styles file */
+.spinner-container {
+  position: fixed; /* Make it fixed to cover the entire viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  //background: rgba(255, 255, 255, 0.8); /* White with transparency */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999; /* Ensure it's above all other elements */
+}
+
+/* Optional: Customize the default spinner (lds-ripple) */
 .lds-ripple {
   display: inline-block;
   position: relative;
-  width: 80px;
-  height: 80px;
+  width: 64px;
+  height: 64px;
 }
 .lds-ripple div {
   position: absolute;
-  border: 4px solid blue;
+  border: 4px solid #000;
   opacity: 1;
   border-radius: 50%;
   animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
@@ -16,31 +31,17 @@
 }
 @keyframes lds-ripple {
   0% {
-    top: 36px;
-    left: 36px;
-    width: 0;
-    height: 0;
-    opacity: 0;
-  }
-  4.9% {
-    top: 36px;
-    left: 36px;
-    width: 0;
-    height: 0;
-    opacity: 0;
-  }
-  5% {
-    top: 36px;
-    left: 36px;
+    top: 28px;
+    left: 28px;
     width: 0;
     height: 0;
     opacity: 1;
   }
   100% {
-    top: 0px;
-    left: 0px;
-    width: 72px;
-    height: 72px;
+    top: -1px;
+    left: -1px;
+    width: 58px;
+    height: 58px;
     opacity: 0;
   }
 }

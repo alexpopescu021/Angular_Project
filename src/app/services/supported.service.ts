@@ -18,6 +18,14 @@ export class SupportedService {
     return this.http.get<any>(`${this.baseApiUrl}/Admin/getcrypto`);
   }
 
+  getSupportedFiat(): Observable<any> {
+    return this.http.get<any>(`${this.baseApiUrl}/Admin/getSupportedFiat`);
+  }
+
+  getSupportedCrypto(): Observable<any> {
+    return this.http.get<any>(`${this.baseApiUrl}/Admin/getSupportedCrypto`);
+  }
+
   saveSupported(currencies: string[], currencyType: string): Observable<any> {
     // Remove everything before the comma
     const modifiedCurrencies = currencies.map((currency) => {
