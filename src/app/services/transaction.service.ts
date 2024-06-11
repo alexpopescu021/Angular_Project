@@ -25,6 +25,18 @@ export class TransactionService {
     );
   }
 
+  createExternalTransaction(transaction: any): Observable<any> {
+    return this.http
+      .post<any>(`${this.baseApiUrl}/Transactions/external`, transaction)
+      .pipe(
+        catchError((error: any) => {
+          // Handle errors here
+          console.error('Error:', error);
+          throw error; // Rethrow the error to propagate it
+        })
+      );
+  }
+
   GetConvertedAmount(
     from: string,
     to: string,

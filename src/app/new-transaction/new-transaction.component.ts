@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { SnackbarService } from '../services/snackbar.service';
+import { TransactionService } from '../services/transaction.service';
 
 @Component({
   selector: 'app-new-transaction',
@@ -8,14 +9,17 @@ import { SnackbarService } from '../services/snackbar.service';
 })
 export class NewTransactionComponent {
   transactionType: string = 'BankTransaction';
-  amount: string = '';
+  amount: number = 0;
   iban: string = '';
   cardNumber: string = '';
 
   /**
    *
    */
-  constructor(private snackbarService: SnackbarService) {}
+  constructor(
+    private snackbarService: SnackbarService,
+    private transactionService: TransactionService
+  ) {}
   onTransactionTypeChange() {
     // Clear the additional input fields when the transaction type changes
     this.iban = '';
@@ -23,19 +27,44 @@ export class NewTransactionComponent {
   }
 
   sendTransaction() {
-    // Handle the send transaction logic here
-    const transactionData: any = {
-      transactionType: this.transactionType,
-      amount: this.amount,
-    };
+    if (this.transactionType === 'Card') {
+      const tax = 0.007;
+      const taxedAmount = this.amount * (1 + tax);
+      console.log(`Sending card transaction with amount: ${taxedAmount} €`);
 
-    if (this.transactionType === 'BankTransaction') {
-      transactionData.iban = this.iban;
-    } else if (this.transactionType === 'Card') {
-      transactionData.cardNumber = this.cardNumber;
+      const transactionPayload = {
+        transactionType: 'Card',
+        amount: taxedAmount,
+      };
+
+      this.transactionService
+        .createExternalTransaction(transactionPayload)
+        .subscribe(
+          (response) => {
+            console.log('Card transaction response:', response);
+          },
+          (error) => {
+            console.error('Error in card transaction:', error);
+          }
+        );
+    } else if (this.transactionType === 'BankTransaction') {
+      console.log(`Sending bank transaction with amount: ${this.amount} €`);
+
+      const transactionPayload = {
+        transactionType: 'BankTransaction',
+        amount: this.amount,
+      };
+
+      this.transactionService
+        .createExternalTransaction(transactionPayload)
+        .subscribe(
+          (response) => {
+            console.log('Bank transaction response:', response);
+          },
+          (error) => {
+            console.error('Error in bank transaction:', error);
+          }
+        );
     }
-
-    console.log('Transaction Data:', transactionData);
-    // Implement the actual send logic here, e.g., make an API call
   }
 }

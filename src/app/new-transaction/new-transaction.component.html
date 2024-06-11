@@ -8,7 +8,7 @@
     </li>
   </ul>
 </nav>
-<form>
+<form (ngSubmit)="sendTransaction()">
   <label for="transactionType">Transaction Type:</label>
   <select
     id="transactionType"
@@ -36,8 +36,20 @@
     />
   </div>
 
-  <label for="amount">Amount:</label>
-  <input type="text" id="amount" [(ngModel)]="amount" name="amount" />
+  <div class="input-container">
+    <label for="amount">Amount:</label>
+    <div class="input-wrapper">
+      <input type="text" id="amount" [(ngModel)]="amount" name="amount" />
+      <span class="currency-symbol">€</span>
+    </div>
+  </div>
 
-  <button type="button" (click)="sendTransaction()">Send</button>
+  <p *ngIf="transactionType === 'Card'">
+    For card transactions, there is a 0.70% tax.
+  </p>
+  <p *ngIf="transactionType === 'BankTransaction'">
+    For bank transactions, there is no tax.
+  </p>
+
+  <button type="submit">Send</button>
 </form>

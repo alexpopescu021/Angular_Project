@@ -61,3 +61,59 @@ li {
   padding-bottom: 5px;
   padding-top: 5px;
 }
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.input-wrapper input {
+  padding-right: 20px; /* Adjust to ensure space for the euro symbol */
+  box-sizing: border-box; /* Ensure padding does not affect the width */
+}
+
+.input-wrapper .currency-symbol {
+  position: absolute;
+  right: 10px; /* Adjust based on desired positioning */
+  top: 39%;
+  transform: translateY(-50%);
+  pointer-events: none; /* Prevent the symbol from interfering with input clicks */
+  color: black; /* Optional: change color if needed */
+  font-weight: 400;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.input-wrapper input {
+  padding-right: 20px; /* Adjust to ensure space for the euro symbol */
+  box-sizing: border-box; /* Ensure padding does not affect the width */
+}
+
+.input-wrapper .currency-symbol {
+  position: absolute;
+  right: 10px; /* Adjust based on desired positioning */
+  top: 39%;
+  transform: translateY(-50%);
+  pointer-events: none; /* Prevent the symbol from interfering with input clicks */
+  color: black; /* Optional: change color if needed */
+  font-weight: 500;
+}
+
+.hint {
+  margin-top: 10px;
+  font-size: 0.9em;
+  color: white;
+}
