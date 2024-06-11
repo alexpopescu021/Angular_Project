@@ -117,3 +117,12 @@ li {
   font-size: 0.9em;
   color: white;
 }
+
+.submit-button:disabled {
+  background-color: grey;
+  opacity: 0.6;
+}
+
+.error {
+  color: white;
+}

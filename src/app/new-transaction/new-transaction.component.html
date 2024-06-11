@@ -8,12 +8,13 @@
     </li>
   </ul>
 </nav>
-<form (ngSubmit)="sendTransaction()">
+<form (ngSubmit)="onSubmit(transactionForm)" #transactionForm="ngForm">
   <label for="transactionType">Transaction Type:</label>
   <select
     id="transactionType"
     [(ngModel)]="transactionType"
     name="transactionType"
+    required
   >
     <option value="BankTransaction">Bank transaction</option>
     <option value="Card">Card</option>
@@ -23,7 +24,17 @@
   <!-- Conditionally display additional input fields -->
   <div *ngIf="transactionType === 'BankTransaction'">
     <label for="iban">IBAN:</label>
-    <input type="text" id="iban" [(ngModel)]="iban" name="iban" />
+    <input
+      type="text"
+      id="iban"
+      [(ngModel)]="iban"
+      name="iban"
+      required
+      #ibanField="ngModel"
+    />
+    <div *ngIf="ibanField.invalid && ibanField.touched" class="error">
+      IBAN is required.
+    </div>
   </div>
 
   <div *ngIf="transactionType === 'Card'">
@@ -33,14 +44,33 @@
       id="cardNumber"
       [(ngModel)]="cardNumber"
       name="cardNumber"
+      required
+      #cardNumberField="ngModel"
     />
+    <div
+      *ngIf="cardNumberField.invalid && cardNumberField.touched"
+      class="error"
+    >
+      Card Number is required.
+    </div>
   </div>
 
   <div class="input-container">
     <label for="amount">Amount:</label>
     <div class="input-wrapper">
-      <input type="text" id="amount" [(ngModel)]="amount" name="amount" />
+      <input
+        type="number"
+        id="amount"
+        [(ngModel)]="amount"
+        name="amount"
+        required
+        min="0.01"
+        #amountField="ngModel"
+      />
       <span class="currency-symbol">€</span>
+    </div>
+    <div *ngIf="amountField.invalid && amountField.touched" class="error">
+      Amount must be greater than 0.
     </div>
   </div>
 
@@ -51,5 +81,11 @@
     For bank transactions, there is no tax.
   </p>
 
-  <button type="submit">Send</button>
+  <button
+    type="submit"
+    [disabled]="transactionForm.invalid"
+    class="submit-button"
+  >
+    Send
+  </button>
 </form>

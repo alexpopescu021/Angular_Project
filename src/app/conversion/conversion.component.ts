@@ -5,6 +5,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { finalize, forkJoin } from 'rxjs';
 import { LoadingService } from '../services/loading.service';
 import { SnackbarService } from '../services/snackbar.service';
@@ -20,6 +21,8 @@ export class ConversionComponent implements OnInit {
   fromCurrency: string = '';
   toCurrency: string = '';
   currencies: string[] = [];
+  coinId: string | null = '';
+  coinSymbol: string | null = '';
 
   displayedCurrenciesFrom: string[] = [];
   displayedCurrenciesTo: string[] = [];
@@ -42,15 +45,20 @@ export class ConversionComponent implements OnInit {
     private transactionService: TransactionService,
     private supportedService: SupportedService,
     private loadingService: LoadingService,
-    private snackbarService: SnackbarService
+    private snackbarService: SnackbarService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
     this.amount = 0;
-    this.getMergedSupportedCurrencies();
-    this.getBalance(this.fromCurrency);
-    this.loadMoreCurrencies('from');
-    this.loadMoreCurrencies('to');
+    this.route.queryParams.subscribe((params) => {
+      this.toCurrency =
+        params['toCurrency'].toUpperCase() || this.currencies[0];
+      this.getMergedSupportedCurrencies();
+      this.getBalance(this.fromCurrency);
+      this.loadMoreCurrencies('from');
+      this.loadMoreCurrencies('to');
+    });
   }
 
   getMergedSupportedCurrencies() {
@@ -59,10 +67,18 @@ export class ConversionComponent implements OnInit {
       crypto: this.supportedService.getSupportedCrypto(),
     }).subscribe(
       ({ fiat, crypto }) => {
-        this.currencies = [...fiat, ...crypto].map(
-          (currency) => currency.currencyCode
-        );
-        this.toCurrency = this.currencies[0];
+        this.currencies = [...fiat, ...crypto]
+          .map((currency) => currency.currencyCode)
+          .filter((currencyCode) => currencyCode); // Filter out empty strings
+        if (this.toCurrency) {
+          // Add toCurrency if not already present in the list
+          if (!this.currencies.includes(this.toCurrency.toUpperCase())) {
+            this.currencies.push(this.toCurrency.toUpperCase());
+          }
+        } else {
+          // If toCurrency is empty, set it to the first currency in the list
+          this.toCurrency = this.currencies[0];
+        }
         this.fromCurrency = this.currencies[1];
         console.log('Currency Codes:', this.currencies);
       },

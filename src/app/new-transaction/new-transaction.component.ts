@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { SnackbarService } from '../services/snackbar.service';
 import { TransactionService } from '../services/transaction.service';
 
@@ -26,6 +27,15 @@ export class NewTransactionComponent {
     this.cardNumber = '';
   }
 
+  onSubmit(form: NgForm) {
+    if (form.invalid) {
+      this.markFormGroupTouched(form);
+      return;
+    }
+
+    this.sendTransaction();
+  }
+
   sendTransaction() {
     if (this.transactionType === 'Card') {
       const tax = 0.007;
@@ -39,14 +49,17 @@ export class NewTransactionComponent {
 
       this.transactionService
         .createExternalTransaction(transactionPayload)
-        .subscribe(
-          (response) => {
+        .subscribe({
+          next: (response: any) => {
             console.log('Card transaction response:', response);
+            this.snackbarService.open('Transaction success', 'Close', 3000, [
+              'success-snackbar',
+            ]);
           },
-          (error) => {
+          error: (error) => {
             console.error('Error in card transaction:', error);
-          }
-        );
+          },
+        });
     } else if (this.transactionType === 'BankTransaction') {
       console.log(`Sending bank transaction with amount: ${this.amount} €`);
 
@@ -60,11 +73,23 @@ export class NewTransactionComponent {
         .subscribe(
           (response) => {
             console.log('Bank transaction response:', response);
+            this.snackbarService.open('Transaction success', 'Close', 3000, [
+              'success-snackbar',
+            ]);
           },
           (error) => {
             console.error('Error in bank transaction:', error);
           }
         );
     }
+  }
+
+  private markFormGroupTouched(formGroup: NgForm) {
+    Object.keys(formGroup.controls).forEach((field) => {
+      const control = formGroup.control.get(field);
+      if (control) {
+        control.markAsTouched({ onlySelf: true });
+      }
+    });
   }
 }

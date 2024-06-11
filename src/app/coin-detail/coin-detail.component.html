@@ -2,9 +2,14 @@
   <div class="col-md-2 coinData">
     <div class="img">
       <img [src]="coinData?.image?.large" alt="" />
-      <h3 class="text-center" style="font-size: 35px">
-        {{ coinData?.name }}
-      </h3>
+      <div>
+        <h3 class="text-center" style="font-size: 35px">
+          {{ coinData?.name }}
+        </h3>
+        <button (click)="buyCurrency()" class="btn btn-primary mt-3">
+          Buy this currency
+        </button>
+      </div>
       <div class="more-detail">
         <span class="title">Rank: </span>
         <span class="value">{{ coinData?.market_cap_rank }}</span
@@ -21,6 +26,7 @@
       </div>
     </div>
   </div>
+
   <div>
     <canvas
       id="crypto-depth"
@@ -32,6 +38,7 @@
     </canvas>
   </div>
 </div>
+
 <div class="col-md-8">
   <canvas #chart></canvas>
 

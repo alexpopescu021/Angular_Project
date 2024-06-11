@@ -6,7 +6,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Chart, ChartDataset } from 'chart.js';
 import 'chartjs-adapter-luxon';
 import {
@@ -30,6 +30,7 @@ export class CoinDetailComponent implements OnInit, OnDestroy, AfterViewInit {
   chart!: Chart;
   coinData: any;
   coinId!: string;
+  coinSymbol!: string | null;
   days: number = 30;
   currency: string = 'EUR';
   bids: any[] = [];
@@ -48,7 +49,8 @@ export class CoinDetailComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private api: ApiService,
     private activatedRoute: ActivatedRoute,
-    private currencyService: ExtCurrencyService
+    private currencyService: ExtCurrencyService,
+    private router: Router
   ) {}
 
   ngOnDestroy(): void {
@@ -63,9 +65,20 @@ export class CoinDetailComponent implements OnInit, OnDestroy, AfterViewInit {
       this.coinId = val['id'];
       this.getCoinData();
     });
+
+    this.activatedRoute.queryParams.subscribe((params) => {
+      this.coinSymbol = params['symbol'];
+    });
+
     this.currencyService.getCurrency().subscribe((val) => {
       this.currency = val;
       this.updateChartData();
+    });
+  }
+
+  buyCurrency() {
+    this.router.navigate(['/conversion'], {
+      queryParams: { toCurrency: this.coinSymbol },
     });
   }
 
