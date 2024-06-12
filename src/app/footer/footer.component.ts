@@ -1,37 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
 })
-export class FooterComponent implements OnInit {
-  public isContentLargerThanViewport: boolean = false;
+export class FooterComponent {
+  @ViewChild('routerOutlet') routerOutlet: ElementRef | undefined;
 
-  constructor(private router: Router) {
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.checkContentLargerThanViewport();
-      }
-    });
-  }
-
-  ngOnInit(): void {
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.checkContentLargerThanViewport();
-      }
-    });
-    this.checkContentLargerThanViewport(); // Check content size when component initializes
-  }
-
-  private checkContentLargerThanViewport() {
-    setTimeout(() => {
-      const bodyHeight = document.body.clientHeight;
-      const viewportHeight = window.innerHeight;
-
-      this.isContentLargerThanViewport = bodyHeight > viewportHeight;
-    });
-  }
+  constructor(
+    private router: Router,
+    private renderer: Renderer2,
+    private el: ElementRef
+  ) {}
 }
