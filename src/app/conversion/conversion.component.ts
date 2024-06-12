@@ -54,11 +54,11 @@ export class ConversionComponent implements OnInit {
     this.route.queryParams.subscribe((params) => {
       this.toCurrency =
         params['toCurrency'].toUpperCase() || this.currencies[0];
-      this.getMergedSupportedCurrencies();
-      this.getBalance(this.fromCurrency);
-      this.loadMoreCurrencies('from');
-      this.loadMoreCurrencies('to');
     });
+    this.getMergedSupportedCurrencies();
+    this.getBalance(this.fromCurrency);
+    this.loadMoreCurrencies('from');
+    this.loadMoreCurrencies('to');
   }
 
   getMergedSupportedCurrencies() {
@@ -70,15 +70,15 @@ export class ConversionComponent implements OnInit {
         this.currencies = [...fiat, ...crypto]
           .map((currency) => currency.currencyCode)
           .filter((currencyCode) => currencyCode); // Filter out empty strings
-        if (this.toCurrency) {
-          // Add toCurrency if not already present in the list
-          if (!this.currencies.includes(this.toCurrency.toUpperCase())) {
-            this.currencies.push(this.toCurrency.toUpperCase());
-          }
-        } else {
-          // If toCurrency is empty, set it to the first currency in the list
-          this.toCurrency = this.currencies[0];
-        }
+        // if (this.toCurrency) {
+        //   // Add toCurrency if not already present in the list
+        //   if (!this.currencies.includes(this.toCurrency.toUpperCase())) {
+        //     this.currencies.push(this.toCurrency.toUpperCase());
+        //   }
+        // } else {
+        //   // If toCurrency is empty, set it to the first currency in the list
+        //   this.toCurrency = this.currencies[0];
+        // }
         this.fromCurrency = this.currencies[1];
         console.log('Currency Codes:', this.currencies);
       },

@@ -11,7 +11,7 @@
       >Crypto Chkr</a
     >
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav me-auto">
         <li class="nav-item">
           <a routerLink="coin-list" class="nav-link"> List </a>
         </li>
@@ -45,7 +45,12 @@
           </div>
         </div>
       </ul>
-      <form class="d-flex dropdown" role="search" dropdown>
+      <form
+        class="d-flex dropdown ms-auto"
+        role="search"
+        dropdown
+        style="width: 20%"
+      >
         <input
           [formControl]="searchControl"
           class="form-control me-2"
@@ -70,15 +75,10 @@
           </div>
         </div>
       </form>
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link">Balance:</a>
-          <span class="nav-link">{{ userBalance }} € ! FIX</span>
-        </li>
-
-        <li class="nav-item">
+      <ul class="navbar-nav">
+        <!-- <li class="nav-item">
           <a class="nav-link" routerLink="/user-list">Users</a>
-        </li>
+        </li> -->
         <li class="nav-item" *ngIf="name">
           <p class="nav-link" routerLink="/profile" style="cursor: pointer">
             Welcome&nbsp;<strong>{{ name }}</strong

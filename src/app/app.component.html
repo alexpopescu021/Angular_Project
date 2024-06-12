@@ -14,6 +14,82 @@
     </div>
   </div>
 </div>
-<a href="#" class="float">
-  <i class="fa fa-headphones my-float"></i>
+<a class="float" (click)="showSupportModal()">
+  <i class="fa fa-robot my-float"></i>
 </a>
+
+<!-- Customer Support Chat Modal -->
+<div
+  aria-hidden="true"
+  aria-labelledby="supportModalLabel"
+  class="modal fade modal-black"
+  id="supportModal"
+  role="dialog"
+  tabindex="-1"
+  [class.show]="showSupport"
+  [style.display]="showSupport ? 'block' : 'none'"
+>
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <button
+          aria-hidden="true"
+          class="close"
+          data-dismiss="modal"
+          (click)="hideSupportModal()"
+          type="button"
+        >
+          <i class="tim-icons icon-simple-remove text-white"></i>
+        </button>
+        <div class="text-muted text-center ml-auto mr-auto">
+          <h3 class="mb-0">Support Chat Bot</h3>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div *ngFor="let message of messages" class="chat-message">
+          <div [class.user]="message.user">{{ message.text }}</div>
+        </div>
+        <div class="chat-options">
+          <button
+            *ngFor="let option of currentOptions"
+            (click)="selectOption(option)"
+            class="btn btn-link"
+          >
+            {{ option.text }}
+          </button>
+        </div>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+          (click)="hideSupportModal()"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .chat-message {
+    margin-bottom: 10px;
+  }
+
+  .chat-message .user {
+    text-align: right;
+    font-weight: bold;
+  }
+
+  .chat-options {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .chat-options .btn-link {
+    margin-bottom: 5px;
+  }
+</style>
