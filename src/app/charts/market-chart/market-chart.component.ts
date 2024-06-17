@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
+import { ApiService } from 'src/app/services/externalServices/service/api.service';
 
-const colorMap = {
+const colorMap: { [key: string]: string } = {
   BTC: 'gold',
   ETH: 'grey',
   ADA: 'RoyalBlue',
@@ -11,39 +13,52 @@ const colorMap = {
   // Add more as needed
 };
 
+function getRandomColor() {
+  const letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
 @Component({
   selector: 'app-market-chart',
   templateUrl: './market-chart.component.html',
   styleUrls: ['./market-chart.component.scss'],
 })
-export class MarketChartComponent {
+export class MarketChartComponent implements OnInit {
   title = 'ng-chart';
   barChart: any;
+  apikey = 'your_api_key_here'; // replace with your actual API key
+
+  constructor(private http: HttpClient, private api: ApiService) {}
 
   ngOnInit() {
-    this.createBarChart();
+    this.api.getTrendingCurrency('usd').subscribe((data) => {
+      this.createBarChart(data);
+    });
   }
 
-  createGradient(ctx: any) {
-    const gradientFill = ctx.createLinearGradient(0, 350, 0, 50);
-    gradientFill.addColorStop(0, 'rgba(228, 76, 196, 0.0)');
-    gradientFill.addColorStop(1, 'rgba(228, 76, 196, 0.14)');
-    return gradientFill;
-  }
+  createBarChart(data: any) {
+    const labels = data.map((coin: any) => coin.id);
+    const marketCaps = data.map((coin: any) => coin.market_cap);
+    const backgroundColors = labels.map(
+      (label: string) => colorMap[label] || getRandomColor()
+    );
 
-  createBarChart() {
     const canvas: any = document.getElementById('barCanvas');
     const ctx = canvas.getContext('2d');
 
     this.barChart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ['BTC', 'ETH', 'BNB', 'ADA', 'DOGE', 'LTC'], // Top cryptos
+        labels,
         datasets: [
           {
             label: 'Market Cap',
-            data: [1000, 2000, 1500, 3000, 500, 1200], // Market cap data
-            backgroundColor: Object.values(colorMap),
+            data: marketCaps,
+            backgroundColor: backgroundColors,
             borderColor: 'white',
             borderWidth: 1,
           },
@@ -51,6 +66,28 @@ export class MarketChartComponent {
       },
       options: {
         scales: {
+          y: {
+            type: 'logarithmic',
+            min: 1000000000, // 1 billion
+            max: 1000000000000, // 1 trillion
+            ticks: {
+              color: 'white', // changes the y-axis label color
+              callback: function (value, _index) {
+                if (
+                  value === 1000000000 ||
+                  value === 10000000000 ||
+                  value === 100000000000 ||
+                  value === 1000000000000
+                ) {
+                  return '$' + value;
+                }
+                return;
+              },
+            },
+            grid: {
+              color: 'rgba(255, 255, 255, 0.1)', // changes the y-axis grid line color
+            },
+          },
           x: {
             ticks: {
               color: 'white', // changes the x-axis label color
@@ -59,22 +96,13 @@ export class MarketChartComponent {
               color: 'rgba(255, 255, 255, 0.1)', // changes the x-axis grid line color
             },
           },
-          y: {
-            ticks: {
-              color: 'white', // changes the y-axis label color
-              callback: function (value, index, ticks) {
-                return '$' + value;
-              },
-            },
-            grid: {
-              color: 'rgba(255, 255, 255, 0.1)', // changes the y-axis grid line color
-            },
-          },
         },
         plugins: {
           legend: {
             labels: {
               color: 'white', // changes the legend color
+              boxWidth: 5,
+              padding: 5,
             },
           },
         },
