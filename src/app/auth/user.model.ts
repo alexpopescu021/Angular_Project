@@ -4,4 +4,9 @@ export class UserDto {
   get password() {
     return this._password;
   }
+  firstName!: string;
+  lastName!: string;
+  email!: string;
+  telephoneNumber!: string;
+  address!: string;
 }

@@ -1,13 +1,13 @@
 <div class="wrapper">
   <div class="page-header">
     <img class="dots" src="assets/img/dots.png" />
-
     <img class="path" src="assets/img/path4.png" />
-
     <div class="container align-items-center">
       <div class="row">
         <div class="col-lg-6 col-md-6">
-          <h1 class="profile-title text-left">Mike Scheinder</h1>
+          <h1 class="profile-title text-left">
+            {{ firstName }} {{ lastName }}
+          </h1>
           <h5 class="text-on-back">01</h5>
           <p class="profile-description">
             Offices parties lasting outward nothing age few resolve. Impression
@@ -41,7 +41,7 @@
                 class="img-center img-fluid rounded-circle"
                 src="assets/img/mike.jpg"
               />
-              <h4 class="title">Transactions</h4>
+              <h4 class="title">Profile</h4>
             </div>
             <div class="card-body">
               <tabset
@@ -59,58 +59,9 @@
                       ><!----></a
                     >
                   </li>
-                  <li _ngcontent-qtc-c1="" class="nav-item">
-                    <a
-                      _ngcontent-qtc-c1=""
-                      class="nav-link"
-                      href="javascript:void(0);"
-                      id=""
-                      ><span _ngcontent-qtc-c1="">Send</span
-                      ><!----></a
-                    >
-                  </li>
-                  <li _ngcontent-qtc-c1="" class="nav-item">
-                    <a
-                      _ngcontent-qtc-c1=""
-                      class="nav-link"
-                      href="javascript:void(0);"
-                      id=""
-                      ><span _ngcontent-qtc-c1="">News</span
-                      ><!----></a
-                    >
-                  </li>
                 </ul>
                 <div _ngcontent-qtc-c1="" class="tab-content">
-                  <tab heading="Wallet" class="active tab-pane"
-                    ><div class="table-responsive">
-                      <table class="table tablesorter" id="plain-table">
-                        <thead class="text-danger">
-                          <tr>
-                            <th class="header">COIN</th>
-                            <th class="header">AMOUNT</th>
-                            <th class="header">VALUE</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>BTC</td>
-                            <td>7.342</td>
-                            <td>48,870.75 USD</td>
-                          </tr>
-                          <tr>
-                            <td>ETH</td>
-                            <td>30.737</td>
-                            <td>64,53.30 USD</td>
-                          </tr>
-                          <tr>
-                            <td>XRP</td>
-                            <td>19.242</td>
-                            <td>18,354.96 USD</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div></tab
-                  ><tab heading="Send" class="tab-pane"
+                  <tab heading="Send" class="tab-pane"
                     ><div class="row">
                       <label class="col-sm-3 col-form-label"> Pay to </label>
                       <div class="col-sm-9">
@@ -141,31 +92,9 @@
                       class="btn btn-simple btn-danger btn-icon btn-round float-right"
                       type="submit"
                     >
-                      <i class="tim-icons icon-send"></i></button></tab
-                  ><tab heading="News" class="tab-pane"
-                    ><div class="table-responsive">
-                      <table class="table tablesorter" id="plain-table">
-                        <thead class="text-danger">
-                          <tr>
-                            <th class="header">Latest Crypto News</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>The Daily: Nexo to Pay on Stable...</td>
-                          </tr>
-                          <tr>
-                            <td>Venezuela Begins Public of Nation...</td>
-                          </tr>
-                          <tr>
-                            <td>PR: BitCanna â Dutch Blockchain...</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div></tab
-                  >
-                </div></tabset
-              >
+                      <i class="tim-icons icon-send"></i></button
+                  ></tab></div
+              ></tabset>
             </div>
           </div>
         </div>
@@ -188,7 +117,12 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label> Your Name </label>
-                      <input class="form-control" type="text" value="Mike" />
+                      <input
+                        class="form-control"
+                        type="text"
+                        name="fullName"
+                        [(ngModel)]="fullName"
+                      />
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -196,8 +130,10 @@
                       <label> Email address </label>
                       <input
                         class="form-control"
-                        placeholder="mike@email.com"
+                        placeholder="email"
                         type="email"
+                        name="email"
+                        [(ngModel)]="email"
                       />
                     </div>
                   </div>
@@ -209,39 +145,31 @@
                       <input
                         class="form-control"
                         type="text"
-                        value="001-12321345"
+                        name="phoneNumber"
+                        [(ngModel)]="phoneNumber"
                       />
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label> Company </label>
+                      <label> Address </label>
                       <input
                         class="form-control"
                         type="text"
-                        value="CreativeTim"
+                        name="address"
+                        [(ngModel)]="address"
                       />
                     </div>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label> Message </label>
-                      <input
-                        class="form-control"
-                        placeholder="Hello there!"
-                        type="text"
-                      />
-                    </div>
-                  </div>
-                </div>
+
                 <button
                   class="btn btn-danger btn-round float-right"
                   placement="right"
                   type="submit"
+                  (click)="saveChanges()"
                 >
-                  Send text
+                  Save Changes
                 </button>
               </form>
             </div>
@@ -256,9 +184,7 @@
               <h4 class="info-title">Find us at the office</h4>
               <p>
                 Bld Mihail Kogalniceanu, nr. 8, <br />
-
                 7652 Bucharest, <br />
-
                 Romania
               </p>
             </div>
@@ -271,9 +197,7 @@
               <h4 class="info-title">Give us a ring</h4>
               <p>
                 Michael Jordan <br />
-
                 +40 762 321 762 <br />
-
                 Mon - Fri, 8:00-22:00
               </p>
             </div>

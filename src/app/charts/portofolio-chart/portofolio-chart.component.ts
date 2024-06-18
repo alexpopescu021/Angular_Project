@@ -2,23 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
 import { PortfolioService } from 'src/app/services/portoflio.service';
 
-const colorMap: { [key: string]: string } = {
-  BTC: 'gold',
-  ETH: 'grey',
-  ADA: 'RoyalBlue',
-  BNB: 'yellow',
-  DOGE: 'lightblue',
-  LTC: 'silver',
-  // Add more as needed
-};
+const themeColors = ['Purple', 'Pink', 'DarkBlue'];
 
-function getRandomColor() {
-  const letters = '0123456789ABCDEF';
-  let color = '#';
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
+function getThemeColor() {
+  return themeColors[Math.floor(Math.random() * themeColors.length)];
 }
 
 @Component({
@@ -39,9 +26,7 @@ export class PortofolioChartComponent implements OnInit {
 
       const labels = filteredPortfolio.map((cv) => cv.currency.currencyCode);
       const data = filteredPortfolio.map((cv) => cv.value);
-      const backgroundColor = labels.map(
-        (label) => colorMap[label] || getRandomColor()
-      );
+      const backgroundColor = labels.map(() => getThemeColor());
 
       this.createPieChart(labels, data, backgroundColor);
     });

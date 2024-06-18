@@ -20,3 +20,7 @@ table {
 mat-card-title {
   color: white !important;
 }
+
+mat-grid-tile {
+  padding-top: calc(40% - 5px) !important;
+}
