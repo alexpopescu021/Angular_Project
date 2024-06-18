@@ -9,12 +9,7 @@
             {{ firstName }} {{ lastName }}
           </h1>
           <h5 class="text-on-back">01</h5>
-          <p class="profile-description">
-            Offices parties lasting outward nothing age few resolve. Impression
-            to discretion understood to we interested he excellence. Him
-            remarkably use projection collecting. Going about eat forty world
-            has round miles.
-          </p>
+          <p class="profile-description">Welcome to your profile page!</p>
           <div class="btn-wrapper profile pt-3">
             <a
               class="btn btn-icon btn-twitter btn-round mr-1"
@@ -112,7 +107,7 @@
               <h5 class="text-on-back">02</h5>
             </div>
             <div class="card-body">
-              <form>
+              <form (ngSubmit)="saveChanges()">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
@@ -162,12 +157,10 @@
                     </div>
                   </div>
                 </div>
-
                 <button
                   class="btn btn-danger btn-round float-right"
                   placement="right"
                   type="submit"
-                  (click)="saveChanges()"
                 >
                   Save Changes
                 </button>
