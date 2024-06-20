@@ -42,6 +42,32 @@
   color: white;
 }
 
-// .test {
-//   height: 130% !important;
-// }
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes modalFadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+}
+
+.modal.show {
+  animation: modalFadeIn 0.5s forwards;
+}
+
+.modal.hide {
+  animation: modalFadeOut 0.5s forwards;
+}

@@ -44,6 +44,7 @@ export class NewTransactionComponent {
 
       const transactionPayload = {
         transactionType: 'Card',
+        Iban: this.iban,
         amount: taxedAmount,
       };
 

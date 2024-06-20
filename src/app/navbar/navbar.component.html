@@ -15,10 +15,10 @@
         <li class="nav-item">
           <a routerLink="coin-list" class="nav-link"> List </a>
         </li>
-        <li class="nav-item">
+        <li *ngIf="isAuthenticated" class="nav-item">
           <a routerLink="transactions" class="nav-link"> Transactions </a>
         </li>
-        <div class="dropdown nav-item" dropdown>
+        <div *ngIf="isAuthenticated" class="dropdown nav-item" dropdown>
           <a
             aria-expanded="false"
             aria-haspopup="true"

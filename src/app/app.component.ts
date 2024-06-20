@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
   currencies: string[] = ['USD', 'EUR']; // Example currency array, adjust as needed
   showConfirmation: boolean = false;
   showSupport: boolean = false;
-
+  hideSupport: boolean = false;
   messages: { text: string; user: boolean }[] = [];
   currentOptions: ChatOption[] = [];
 
@@ -90,6 +90,14 @@ export class AppComponent implements OnInit {
   resetChat(): void {
     this.messages = [{ text: 'How can we assist you today?', user: false }];
     this.currentOptions = this.initialOptions;
+  }
+
+  onAnimationEnd() {
+    if (!this.showSupport) {
+      this.hideSupport = true;
+    } else {
+      this.hideSupport = false;
+    }
   }
 
   showSupportModal() {

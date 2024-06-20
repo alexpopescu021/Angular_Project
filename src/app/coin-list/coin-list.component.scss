@@ -5,21 +5,23 @@
   flex-direction: column;
   justify-content: center;
   color: #fff;
-  h2 {
-    font-weight: bold;
-    margin-bottom: 15px;
-    font-size: 3.75rem;
-    line-height: 1.2;
-    letter-spacing: -0.0083em;
-  }
-  h6 {
-    color: darkgray;
-    text-transform: capitalize;
-    font-size: 0.8rem;
-    font-weight: 500;
-    line-height: 1.57;
-    letter-spacing: 0.00714em;
-  }
+}
+
+.header h2 {
+  font-weight: bold;
+  margin-bottom: 15px;
+  font-size: 3.75rem;
+  line-height: 1.2;
+  letter-spacing: -0.0083em;
+}
+
+.header h6 {
+  color: darkgray;
+  text-transform: capitalize;
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 1.57;
+  letter-spacing: 0.00714em;
 }
 
 .row {
@@ -33,6 +35,13 @@
 .container {
   max-width: 960px;
   margin: auto;
+  margin-top: 50px;
+}
+
+.container-featured {
+  max-width: 1360px;
+  margin: auto;
+  margin-top: 50px;
 }
 
 .card-img-top {
@@ -68,8 +77,6 @@
 
 .sub-header {
   height: 50%;
-  display: flex;
-  align-items: center;
 }
 
 .card {
@@ -77,20 +84,22 @@
   background: transparent;
   color: #fff;
   width: 100px;
-  height: 200px;
   box-shadow: none;
+  margin-bottom: 0px !important;
+}
 
-  img {
-    width: 70px;
-    height: 70px;
-    margin: 0 auto;
-  }
-  h5 {
-    font-weight: 500;
-  }
-  p {
-    font-weight: 700;
-  }
+.card img {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto;
+}
+
+.card h5 {
+  font-weight: 500;
+}
+
+.card p {
+  font-weight: 700;
 }
 
 table {
@@ -123,7 +132,6 @@ th {
   height: 70px;
 }
 
-/* Adjust background and text color for table cells */
 .mat-cell,
 .mat-header-cell {
   color: white;
@@ -134,10 +142,24 @@ tr:hover {
   cursor: pointer;
 }
 
-.container {
-  margin-top: 50px;
-}
-
 mat-paginator {
   color: white;
+}
+
+.table-container {
+  width: 100%;
+  max-width: none; /* Remove the max-width constraint */
+  background-color: #1e1e2a;
+  border-radius: 15px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+  padding: 20px; /* Add some padding */
+}
+
+.featured-container {
+  width: 100%;
+  max-width: none; /* Remove the max-width constraint */
+  background-color: #1e1e2a;
+  border-radius: 15px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+  padding: 20px; /* Add some padding */
 }

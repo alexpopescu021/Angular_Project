@@ -5,17 +5,13 @@
   >New Transaction</a
 >
 
-<table mat-table [dataSource]="TransactionsList" class="mat-elevation-z8">
+<table class="table" mat-table [dataSource]="TransactionsList">
   <ng-container
     *ngFor="let column of columns"
     [matColumnDef]="column!.columnDef"
   >
-    <th mat-header-cell *matHeaderCellDef>
-      {{ column!.header }}
-    </th>
-    <td mat-cell *matCellDef="let row">
-      {{ column!.cell(row) }}
-    </td>
+    <th mat-header-cell *matHeaderCellDef>{{ column!.header }}</th>
+    <td mat-cell *matCellDef="let row">{{ column!.cell(row) }}</td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

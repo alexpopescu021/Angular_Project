@@ -32,7 +32,9 @@
   role="dialog"
   tabindex="-1"
   [class.show]="showSupport"
-  [style.display]="showSupport ? 'block' : 'none'"
+  [class.hide]="!showSupport && hideSupport !== undefined"
+  [style.display]="showSupport || hideSupport === undefined ? 'block' : 'none'"
+  (animationend)="onAnimationEnd()"
 >
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">

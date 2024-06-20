@@ -15,8 +15,10 @@ import {
 } from 'chartjs-chart-financial';
 import zoomPlugin from 'chartjs-plugin-zoom';
 
+import { Subscription } from 'rxjs';
 import { ApiService } from '../services/externalServices/service/api.service';
 import { ExtCurrencyService } from '../services/externalServices/service/ext-currency.service';
+import { LoginService } from '../services/login.service';
 
 Chart.register(CandlestickElement, CandlestickController, zoomPlugin);
 
@@ -35,7 +37,8 @@ export class CoinDetailComponent implements OnInit, OnDestroy, AfterViewInit {
   currency: string = 'EUR';
   bids: any[] = [];
   asks: any[] = [];
-
+  private userSub: Subscription = new Subscription();
+  isAuthenticated = false;
   depthData: ChartDataset[] = [];
   chartOptions: any = {
     scales: {},
@@ -50,7 +53,8 @@ export class CoinDetailComponent implements OnInit, OnDestroy, AfterViewInit {
     private api: ApiService,
     private activatedRoute: ActivatedRoute,
     private currencyService: ExtCurrencyService,
-    private router: Router
+    private router: Router,
+    private authService: LoginService
   ) {}
 
   ngOnDestroy(): void {
@@ -73,6 +77,10 @@ export class CoinDetailComponent implements OnInit, OnDestroy, AfterViewInit {
     this.currencyService.getCurrency().subscribe((val) => {
       this.currency = val;
       this.updateChartData();
+    });
+
+    this.userSub = this.authService.userSub.subscribe((user) => {
+      this.isAuthenticated = !!user;
     });
   }
 
