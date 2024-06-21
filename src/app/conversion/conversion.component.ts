@@ -56,7 +56,6 @@ export class ConversionComponent implements OnInit {
         params['toCurrency'].toUpperCase() || this.currencies[0];
     });
     this.getMergedSupportedCurrencies();
-    this.getBalance(this.fromCurrency);
     this.loadMoreCurrencies('from');
     this.loadMoreCurrencies('to');
   }
@@ -69,7 +68,9 @@ export class ConversionComponent implements OnInit {
       ({ fiat, crypto }) => {
         this.currencies = [...fiat, ...crypto]
           .map((currency) => currency.currencyCode)
-          .filter((currencyCode) => currencyCode); // Filter out empty strings
+          .filter(
+            (currencyCode) => currencyCode && currencyCode !== 'External'
+          ); // Filter out empty strings and "External"
         // if (this.toCurrency) {
         //   // Add toCurrency if not already present in the list
         //   if (!this.currencies.includes(this.toCurrency.toUpperCase())) {
@@ -79,8 +80,9 @@ export class ConversionComponent implements OnInit {
         //   // If toCurrency is empty, set it to the first currency in the list
         //   this.toCurrency = this.currencies[0];
         // }
-        this.fromCurrency = this.currencies[1];
+        this.fromCurrency = this.currencies[0];
         console.log('Currency Codes:', this.currencies);
+        this.getBalance(this.fromCurrency);
       },
       (error) => {
         console.error('Error fetching data', error);

@@ -85,7 +85,79 @@
     type="submit"
     [disabled]="transactionForm.invalid"
     class="submit-button"
+    (click)="openConfirmationModal()"
   >
     Send
   </button>
 </form>
+
+<!-- Confirmation Modal -->
+<div
+  aria-hidden="true"
+  aria-labelledby="confirmationModalLabel"
+  class="modal fade modal-black"
+  id="confirmationModal"
+  role="dialog"
+  tabindex="-1"
+  [class.show]="showConfirmation"
+  [style.display]="showConfirmation ? 'block' : 'none'"
+>
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <button
+          aria-hidden="true"
+          class="close"
+          data-dismiss="modal"
+          (click)="cancelTransaction()"
+          type="button"
+        >
+          <i class="tim-icons icon-simple-remove text-white"></i>
+        </button>
+        <div class="text-muted text-center ml-auto mr-auto">
+          <h3 class="mb-0">Confirmation</h3>
+        </div>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to convert {{ amount }}</p>
+        <p *ngIf="transactionType === 'Card'">
+          Transaction Fee: 0.70%
+          <button
+            type="button"
+            class="btn btn-link p-0"
+            container="body"
+            placement="right"
+            data-toggle="tooltip"
+            data-placement="top"
+            ngbPopover="This is the commission for the transaction."
+          >
+            <i class="fas fa-question-circle"></i>
+          </button>
+        </p>
+        <p *ngIf="transactionType === 'BankTransaction'">
+          Transaction Fee: No Fee
+        </p>
+        <p *ngIf="transactionType === 'Card'">
+          Total transaction price: {{ amount + amount * (0.7 / 100) }}
+        </p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="confirmTransaction()"
+        >
+          Confirm
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+          (click)="cancelTransaction()"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

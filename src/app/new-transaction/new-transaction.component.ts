@@ -13,6 +13,7 @@ export class NewTransactionComponent {
   amount: number = 0;
   iban: string = '';
   cardNumber: string = '';
+  showConfirmation: boolean = false;
 
   /**
    *
@@ -32,8 +33,6 @@ export class NewTransactionComponent {
       this.markFormGroupTouched(form);
       return;
     }
-
-    this.sendTransaction();
   }
 
   sendTransaction() {
@@ -83,6 +82,20 @@ export class NewTransactionComponent {
           }
         );
     }
+  }
+
+  cancelTransaction() {
+    this.showConfirmation = false;
+  }
+
+  confirmTransaction() {
+    this.sendTransaction();
+
+    this.showConfirmation = false;
+  }
+
+  openConfirmationModal() {
+    this.showConfirmation = true;
   }
 
   private markFormGroupTouched(formGroup: NgForm) {
