@@ -32,6 +32,7 @@
     "chartjs-plugin-crosshair": "^2.0.0",
     "chartjs-plugin-zoom": "^2.0.1",
     "date-fns": "^3.6.0",
+    "jspdf-autotable": "^3.8.2",
     "jw-bootstrap-switch-ng2": "^2.0.5",
     "lightweight-charts": "^4.1.4",
     "luxon": "^3.4.4",

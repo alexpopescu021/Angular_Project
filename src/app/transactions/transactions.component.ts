@@ -1,4 +1,9 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { jsPDF } from 'jspdf';
+import 'jspdf-autotable';
+import autoTable from 'jspdf-autotable';
 import { Transaction } from '../models/transaction.model';
 import { TransactionService } from '../services/transaction.service';
 
@@ -12,28 +17,27 @@ export class TransactionsComponent implements OnInit {
   columns = [
     {
       columnDef: 'sourceCurrencyCode',
-      header: 'SourceCurrency',
-      cell: (element: Transaction) => `${element.sourceCurrencyCode}`,
+      header: 'Source',
+      cell: (element: Transaction) =>
+        this.sanitizer.bypassSecurityTrustHtml(
+          element.sourceCurrencyCode === 'External'
+            ? `<span style="color: #cf51df; font-weight: bold;">${element.sourceCurrencyCode}</span>`
+            : `${element.sourcePrice} <span style="color: #cf51df; font-weight: bold;">${element.sourceCurrencyCode}</span>`
+        ),
     },
     {
       columnDef: 'targetCurrencyCode',
-      header: 'TargetCurrency',
-      cell: (element: Transaction) => `${element.targetCurrencyCode}`,
+      header: 'Target',
+      cell: (element: Transaction) =>
+        this.sanitizer.bypassSecurityTrustHtml(
+          `${element.targetPrice} <span style="color: #cf51df; font-weight: bold;">${element.targetCurrencyCode}</span>`
+        ),
     },
     {
       columnDef: 'transactionDate',
       header: 'TransactionDate',
-      cell: (element: Transaction) => `${element.transactionDate}`,
-    },
-    {
-      columnDef: 'sourcePrice',
-      header: 'SourcePrice',
-      cell: (element: Transaction) => `${element.sourcePrice}`,
-    },
-    {
-      columnDef: 'targetPrice',
-      header: 'TargetPrice',
-      cell: (element: Transaction) => `${element.targetPrice}`,
+      cell: (element: Transaction) =>
+        this.datePipe.transform(element.transactionDate, "dd/MM/yy 'at' HH:mm"),
     },
     {
       columnDef: 'conversionRate',
@@ -43,7 +47,11 @@ export class TransactionsComponent implements OnInit {
   ];
   displayedColumns = this.columns.map((c) => c!.columnDef);
 
-  constructor(public transactionService: TransactionService) {}
+  constructor(
+    public transactionService: TransactionService,
+    private datePipe: DatePipe,
+    private sanitizer: DomSanitizer
+  ) {}
 
   ngOnInit() {
     this.loadTransactions();
@@ -103,7 +111,22 @@ export class TransactionsComponent implements OnInit {
         targetPrice: 2,
         conversionRate: 0.02,
       },
-      // ... add more seeded transactions as needed ...
     ];
+  }
+
+  generatePdf() {
+    const doc = new jsPDF();
+    const columns = this.columns.map((column) => column.header);
+    const rows = this.TransactionsList.map((transaction: Transaction) =>
+      this.columns.map((column) => column.cell(transaction))
+    );
+
+    autoTable(doc, {
+      head: [columns],
+      body: rows,
+      headStyles: { halign: 'center' },
+    });
+
+    doc.save('Transactions.pdf');
   }
 }

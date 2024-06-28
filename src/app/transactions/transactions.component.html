@@ -4,6 +4,9 @@
   href="new-transaction"
   >New Transaction</a
 >
+<button class="btn btn-primary" mat-raised-button (click)="generatePdf()">
+  Download PDF
+</button>
 
 <table class="table" mat-table [dataSource]="TransactionsList">
   <ng-container
@@ -11,7 +14,7 @@
     [matColumnDef]="column!.columnDef"
   >
     <th mat-header-cell *matHeaderCellDef>{{ column!.header }}</th>
-    <td mat-cell *matCellDef="let row">{{ column!.cell(row) }}</td>
+    <td mat-cell *matCellDef="let row" [innerHTML]="column.cell(row)"></td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

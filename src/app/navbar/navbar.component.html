@@ -5,9 +5,17 @@
 >
   <div class="container-fluid">
     <a
+      *ngIf="isAuthenticated"
       class="navbar-brand active"
       style="font-weight: bolder"
       routerLink="/dashboard"
+      >Crypto Chkr</a
+    >
+    <a
+      *ngIf="!isAuthenticated"
+      class="navbar-brand active"
+      style="font-weight: bolder"
+      routerLink="/coin-list"
       >Crypto Chkr</a
     >
     <div class="collapse navbar-collapse" id="navbarSupportedContent">

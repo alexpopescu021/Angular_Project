@@ -37,7 +37,7 @@ import { TransactionsComponent } from './transactions/transactions.component';
 import { UserListComponent } from './user-list/user-list.component';
 
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { MarketChartComponent } from './charts/market-chart/market-chart.component';
 import { PortofolioChartComponent } from './charts/portofolio-chart/portofolio-chart.component';
 import { CoinDetailComponent } from './coin-detail/coin-detail.component';
@@ -99,6 +99,7 @@ import { UserComponent } from './user/user.component';
     NgbModule,
   ],
   providers: [
+    DatePipe,
     TransactionService,
     LoadingService,
     FilterItemsPipe,

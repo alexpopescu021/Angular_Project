@@ -2,10 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
 import { PortfolioService } from 'src/app/services/portoflio.service';
 
-const themeColors = ['Purple', 'Pink', 'DarkBlue'];
+let themeColors = ['Purple', 'Pink', 'DarkBlue'];
 
 function getThemeColor() {
-  return themeColors[Math.floor(Math.random() * themeColors.length)];
+  // If all colors have been used, reset the array
+  if (themeColors.length === 0) {
+    themeColors = ['Purple', 'Pink', 'DarkBlue'];
+  }
+
+  // Select a random color from the available ones
+  const color = themeColors[Math.floor(Math.random() * themeColors.length)];
+
+  // Remove the selected color from themeColors
+  themeColors = themeColors.filter((c) => c !== color);
+
+  return color;
 }
 
 @Component({
