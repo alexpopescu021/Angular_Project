@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
 import { PortfolioService } from 'src/app/services/portoflio.service';
 
@@ -24,7 +24,7 @@ function getThemeColor() {
   templateUrl: './portofolio-chart.component.html',
   styleUrls: ['./portofolio-chart.component.scss'],
 })
-export class PortofolioChartComponent implements OnInit {
+export class PortofolioChartComponent implements OnInit, OnDestroy {
   title = 'ng-chart';
   pieChart: any;
 
@@ -89,5 +89,12 @@ export class PortofolioChartComponent implements OnInit {
         },
       },
     });
+  }
+
+  ngOnDestroy() {
+    if (this.pieChart) {
+      this.pieChart.destroy();
+      this.pieChart = null;
+    }
   }
 }

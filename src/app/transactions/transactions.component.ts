@@ -4,6 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
 import autoTable from 'jspdf-autotable';
+import { Subject, takeUntil } from 'rxjs';
 import { Transaction } from '../models/transaction.model';
 import { TransactionService } from '../services/transaction.service';
 
@@ -13,6 +14,8 @@ import { TransactionService } from '../services/transaction.service';
   styleUrls: ['./transactions.component.scss'],
 })
 export class TransactionsComponent implements OnInit {
+  private ngUnsubscribe = new Subject<void>();
+
   TransactionsList: any = [];
   columns = [
     {
@@ -58,15 +61,19 @@ export class TransactionsComponent implements OnInit {
   }
 
   loadTransactions() {
-    this.transactionService.GetAllTransactions().subscribe(
-      (data: {}) => {
-        this.TransactionsList = data;
-      },
-      (error) => {
-        console.error('Error:', error);
-        this.seedData();
-      }
-    );
+    this.transactionService
+      .GetAllTransactions()
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(
+        (data: {}) => {
+          this.TransactionsList = data;
+          console.log(data);
+        },
+        (error) => {
+          console.error('Error:', error);
+          //this.seedData();
+        }
+      );
   }
 
   seedData() {
@@ -125,6 +132,7 @@ export class TransactionsComponent implements OnInit {
       head: [columns],
       body: rows,
       headStyles: { halign: 'center' },
+      html: '#table',
     });
 
     doc.save('Transactions.pdf');
@@ -148,5 +156,10 @@ export class TransactionsComponent implements OnInit {
       default:
         return '';
     }
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

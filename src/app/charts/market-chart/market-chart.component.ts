@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
 import { ApiService } from 'src/app/services/externalServices/service/api.service';
 
@@ -14,7 +14,7 @@ function getThemeColor() {
   templateUrl: './market-chart.component.html',
   styleUrls: ['./market-chart.component.scss'],
 })
-export class MarketChartComponent implements OnInit {
+export class MarketChartComponent implements OnInit, OnDestroy {
   title = 'ng-chart';
   barChart: any;
   apikey = 'your_api_key_here'; // replace with your actual API key
@@ -93,5 +93,12 @@ export class MarketChartComponent implements OnInit {
         },
       },
     });
+  }
+
+  ngOnDestroy() {
+    if (this.barChart) {
+      this.barChart.destroy();
+      this.barChart = null;
+    }
   }
 }
