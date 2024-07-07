@@ -41,7 +41,6 @@ export class CoinDetailComponent implements OnInit, OnDestroy, AfterViewInit {
   isAuthenticated = false;
   depthData: ChartDataset[] = [];
   chartOptions: any = {
-    scales: {},
     plugins: {
       legend: {
         display: false,
@@ -64,7 +63,6 @@ export class CoinDetailComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.generateRandomOrders();
     this.activatedRoute.params.subscribe((val) => {
       this.coinId = val['id'];
       this.getCoinData();
@@ -90,17 +88,28 @@ export class CoinDetailComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-  generateRandomOrders(): void {
+  generateOrders(): void {
+    let coinPrice = this.coinData?.market_data.current_price.eur;
+    let lowerLimit = coinPrice - 10; // Lower limit for random price
+    let upperLimit = coinPrice + 10; // Upper limit for random price
+
     for (let i = 0; i < 10; i++) {
-      let bidPrice = Number((Math.random() * 5000 + 5000).toFixed(2));
-      let askPrice = Number((Math.random() * 5000 + 10000).toFixed(2));
+      let bidPrice = Number(
+        (Math.random() * (upperLimit - lowerLimit) + lowerLimit).toFixed(2)
+      );
+      let askPrice = Number(
+        (Math.random() * (upperLimit - lowerLimit) + lowerLimit).toFixed(2)
+      );
       let amount = Number((Math.random() * 5).toFixed(2));
+
       this.bids.push({ price: bidPrice, amount });
       this.asks.push({ price: askPrice, amount });
     }
+
     // Sort bids in descending order and asks in ascending order
     this.bids.sort((a, b) => b.price - a.price);
     this.asks.sort((a, b) => a.price - b.price);
+
     // Add to depthData
     this.bids.forEach((bid, i) => {
       this.depthData.push({
@@ -110,6 +119,7 @@ export class CoinDetailComponent implements OnInit, OnDestroy, AfterViewInit {
         borderWidth: 1,
       });
     });
+
     this.asks.forEach((ask, i) => {
       this.depthData.push({
         data: [{ x: ask.price, y: ask.amount }],
@@ -167,6 +177,7 @@ export class CoinDetailComponent implements OnInit, OnDestroy, AfterViewInit {
   getCoinData() {
     this.api.getCurrencyById(this.coinId).subscribe((res) => {
       this.coinData = res;
+      this.generateOrders();
     });
   }
 

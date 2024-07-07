@@ -17,16 +17,19 @@
           Login to buy!
         </a>
       </div>
-      <div class="more-detail">
+      <br /><br /><br />
+      <div class="more-detail" style="width: 200px">
         <span class="title">Rank: </span>
         <span class="value">{{ coinData?.market_cap_rank }}</span
         ><br />
         <span class="title">Current Price: </span>
+        <br />
         <span class="value">{{
           coinData?.market_data.current_price.eur | currency : currency
         }}</span>
         <br />
         <span class="title">Market Cap: </span>
+        <br />
         <span class="value">{{
           coinData?.market_data.market_cap.eur | currency : currency
         }}</span>

@@ -48,7 +48,7 @@ export class PortofolioChartComponent implements OnInit {
     const ctx = canvas.getContext('2d');
 
     this.pieChart = new Chart(ctx, {
-      type: 'pie',
+      type: 'doughnut',
       data: {
         labels,
         datasets: [

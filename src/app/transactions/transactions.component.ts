@@ -118,7 +118,7 @@ export class TransactionsComponent implements OnInit {
     const doc = new jsPDF();
     const columns = this.columns.map((column) => column.header);
     const rows = this.TransactionsList.map((transaction: Transaction) =>
-      this.columns.map((column) => column.cell(transaction))
+      this.columns.map((column) => this.formatCellForPdf(column, transaction))
     );
 
     autoTable(doc, {
@@ -128,5 +128,25 @@ export class TransactionsComponent implements OnInit {
     });
 
     doc.save('Transactions.pdf');
+  }
+
+  formatCellForPdf(column: any, transaction: Transaction) {
+    switch (column.columnDef) {
+      case 'sourceCurrencyCode':
+        return transaction.sourceCurrencyCode === 'External'
+          ? transaction.sourceCurrencyCode
+          : `${transaction.sourcePrice} ${transaction.sourceCurrencyCode}`;
+      case 'targetCurrencyCode':
+        return `${transaction.targetPrice} ${transaction.targetCurrencyCode}`;
+      case 'transactionDate':
+        return this.datePipe.transform(
+          transaction.transactionDate,
+          "dd/MM/yy 'at' HH:mm"
+        );
+      case 'conversionRate':
+        return `${transaction.conversionRate}`;
+      default:
+        return '';
+    }
   }
 }

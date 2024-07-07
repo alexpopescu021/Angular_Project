@@ -46,13 +46,11 @@ import { FooterComponent } from './footer/footer.component';
 import { LandingComponent } from './landing/landing.component';
 import { CustomOverlayContainer } from './pipes/filterItems/custom-overlay-container';
 import { LoadingService } from './services/loading.service';
-import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    UserComponent,
     TransactionsComponent,
     ListComponent,
     SupportedFiatComponent,
