@@ -76,6 +76,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   gotoDetails(row: any) {
-    this.router.navigate(['coin-detail', row.id]);
+    this.router.navigate(['coin-detail', row.id], { queryParams: { symbol: row.symbol } });
   }
 }
