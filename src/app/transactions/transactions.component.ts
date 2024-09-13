@@ -16,9 +16,10 @@ import { TransactionService } from '../services/transaction.service';
 export class TransactionsComponent implements OnInit {
   private ngUnsubscribe = new Subject<void>();
 
-  availableCurrencies: string[] = []; // List of available currencies to filter
-  selectedCurrencies: string[] = []; // Selected currencies for filtering
-  TransactionsList: any = [];
+  availableCurrencies: string[] = [];
+  selectedCurrencies: string[] = [];
+  TransactionsList: Transaction[] = [];
+  filteredTransactions: Transaction[] = [];
   columns = [
     {
       columnDef: 'sourceCurrencyCode',
@@ -50,7 +51,7 @@ export class TransactionsComponent implements OnInit {
       cell: (element: Transaction) => `${element.conversionRate}`,
     },
   ];
-  displayedColumns = this.columns.map((c) => c!.columnDef);
+  displayedColumns = this.columns.map((c) => c.columnDef);
 
   constructor(
     public transactionService: TransactionService,
@@ -60,34 +61,34 @@ export class TransactionsComponent implements OnInit {
 
   ngOnInit() {
     this.loadTransactions();
-    this.populateAvailableCurrencies();
   }
 
   populateAvailableCurrencies() {
-    // Ensure the TransactionsList has valid data and map accordingly
     const sourceCurrencies = this.TransactionsList.map(
       (t: Transaction) => t.sourceCurrencyCode
     );
-    console.log(this.TransactionsList);
     const targetCurrencies = this.TransactionsList.map(
       (t: Transaction) => t.targetCurrencyCode
     );
 
-    // Combine source and target currencies and filter unique values
     this.availableCurrencies = Array.from(
       new Set([...sourceCurrencies, ...targetCurrencies])
     );
   }
 
-  // Apply the filter logic
-  applyCurrencyFilter() {
-    console.log('Filtering by currencies:', this.selectedCurrencies);
-    // Implement your actual filter logic here
+  applyCurrencyFilter(selectedCurrencies: string[]) {
+    this.selectedCurrencies = selectedCurrencies;
+    this.filteredTransactions = this.TransactionsList.filter(
+      (transaction) =>
+        this.selectedCurrencies.length === 0 ||
+        this.selectedCurrencies.includes(transaction.sourceCurrencyCode) ||
+        this.selectedCurrencies.includes(transaction.targetCurrencyCode)
+    );
   }
 
-  // Clear the selected filters
   clearFilter() {
-    this.selectedCurrencies = this.TransactionsList;
+    this.selectedCurrencies = [];
+    this.filteredTransactions = [...this.TransactionsList];
   }
 
   loadTransactions() {
@@ -95,77 +96,41 @@ export class TransactionsComponent implements OnInit {
       .GetAllTransactions()
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(
-        (data: {}) => {
+        (data: any) => {
           this.TransactionsList = data;
-          this.selectedCurrencies = this.TransactionsList;
+          this.filteredTransactions = [...this.TransactionsList];
+          this.populateAvailableCurrencies();
         },
         (error) => {
           console.error('Error:', error);
-          //this.seedData();
+          // this.seedData();
         }
       );
   }
+
   onCurrencyChange(event: any) {
     const currency = event.target.value;
     if (event.target.checked) {
-      // Add the selected currency to the list
       this.selectedCurrencies.push(currency);
     } else {
-      // Remove the unselected currency from the list
       this.selectedCurrencies = this.selectedCurrencies.filter(
         (c) => c !== currency
       );
     }
+    this.applyCurrencyFilter(this.selectedCurrencies);
   }
+
   seedData() {
     this.TransactionsList = [
-      {
-        sourceCurrencyCode: 'USD',
-        targetCurrencyCode: 'BTC',
-        transactionDate: new Date(),
-        sourcePrice: 50000,
-        targetPrice: 1,
-        conversionRate: 50000,
-      },
-      {
-        sourceCurrencyCode: 'BTC',
-        targetCurrencyCode: 'ETH',
-        transactionDate: new Date(),
-        sourcePrice: 1,
-        targetPrice: 30,
-        conversionRate: 30,
-      },
-      {
-        sourceCurrencyCode: 'ETH',
-        targetCurrencyCode: 'USD',
-        transactionDate: new Date(),
-        sourcePrice: 30,
-        targetPrice: 1500,
-        conversionRate: 50,
-      },
-      {
-        sourceCurrencyCode: 'BNB',
-        targetCurrencyCode: 'BTC',
-        transactionDate: new Date(),
-        sourcePrice: 10,
-        targetPrice: 0.2,
-        conversionRate: 0.02,
-      },
-      {
-        sourceCurrencyCode: 'ADA',
-        targetCurrencyCode: 'ETH',
-        transactionDate: new Date(),
-        sourcePrice: 100,
-        targetPrice: 2,
-        conversionRate: 0.02,
-      },
+      // Your seed data here
     ];
+    this.filteredTransactions = [...this.TransactionsList];
   }
 
   generatePdf() {
     const doc = new jsPDF();
     const columns = this.columns.map((column) => column.header);
-    const rows = this.TransactionsList.map((transaction: Transaction) =>
+    const rows = this.filteredTransactions.map((transaction: Transaction) =>
       this.columns.map((column) => this.formatCellForPdf(column, transaction))
     );
 
