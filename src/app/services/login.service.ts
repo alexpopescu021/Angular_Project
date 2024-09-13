@@ -11,6 +11,8 @@ import { UserDto } from '../auth/user.model';
 export class LoginService {
   constructor(private http: HttpClient, private router: Router) {}
   baseApiUrl: string = environment.baseApiUrl;
+
+  // BehaviorSubject for user data
   public userSub: BehaviorSubject<any | UserDto> = new BehaviorSubject<
     any | UserDto
   >(null);
@@ -18,26 +20,30 @@ export class LoginService {
   handleError(error: HttpErrorResponse) {
     let errorMessage = 'An unknown error occurred!';
     if (error.error instanceof ErrorEvent) {
-      // A client-side or network error occurred. Handle it accordingly.
+      // Client-side or network error
       errorMessage = `Error: ${error.error.message}`;
     } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong,
-      // here we are assuming the backend returns just a string.
+      // Backend returned an unsuccessful response code
       errorMessage = `Error: ${error.error}`;
     }
     console.error(errorMessage);
     return throwError(errorMessage);
   }
 
+  // Login method with token handling
   login(loginObj: UserDto) {
     return this.http.post<any>(`${this.baseApiUrl}/Auth/login`, loginObj).pipe(
       catchError(this.handleError),
       tap((resData) => {
-        if (resData && resData.username && resData.password) {
-          const user = new UserDto(resData.username, resData.password);
+        if (resData && resData.token && resData.username) {
+          this.storeToken(resData.token);
+          const user = new UserDto(resData.username, loginObj.password); // Password comes from input
+
+          // Store user in BehaviorSubject
           this.userSub.next(user);
-          localStorage.setItem('userData', JSON.stringify(resData));
+
+          // Store both token and user data in localStorage
+          localStorage.setItem('userData', JSON.stringify(user));
         } else {
           console.error('Invalid response data format');
           throw new Error('Invalid response data format');
@@ -52,8 +58,8 @@ export class LoginService {
       .pipe(
         catchError(this.handleError),
         tap((resData) => {
-          if (resData && resData.username && resData.password) {
-            const user = new UserDto(resData.username, resData.password);
+          if (resData && resData.username) {
+            const user = new UserDto(resData.username, loginObj.password);
             this.userSub.next(user);
           } else {
             console.error('Invalid response data format');
@@ -70,8 +76,10 @@ export class LoginService {
   }
 
   autoLogin() {
-    let userDataLocal = localStorage.getItem('userData');
-    if (userDataLocal !== null) {
+    const userDataLocal = localStorage.getItem('userData');
+    const token = this.getToken();
+
+    if (userDataLocal !== null && token) {
       const userData: {
         username: string;
         _password: string;
@@ -80,12 +88,28 @@ export class LoginService {
       if (!userData) {
         return;
       }
+
       const loadedUser = new UserDto(userData.username, userData._password);
 
-      // use token here -- Adding Auto-Login
+      // Check if user exists and token is present
       if (loadedUser) {
         this.userSub.next(loadedUser);
       }
     }
+  }
+
+  // Store the JWT token in localStorage
+  private storeToken(token: string): void {
+    localStorage.setItem('jwt', token);
+  }
+
+  // Retrieve the token from localStorage
+  getToken(): string | null {
+    return localStorage.getItem('jwt');
+  }
+
+  // Check if a token exists
+  private hasToken(): boolean {
+    return !!localStorage.getItem('jwt');
   }
 }

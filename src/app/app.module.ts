@@ -1,5 +1,5 @@
 import { LayoutModule } from '@angular/cdk/layout';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -38,6 +38,7 @@ import { UserListComponent } from './user-list/user-list.component';
 
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { CommonModule, DatePipe } from '@angular/common';
+import { AuthInterceptor } from './auth/auth.interceptor';
 import { MarketChartComponent } from './charts/market-chart/market-chart.component';
 import { PortofolioChartComponent } from './charts/portofolio-chart/portofolio-chart.component';
 import { CoinDetailComponent } from './coin-detail/coin-detail.component';
@@ -102,6 +103,7 @@ import { LoadingService } from './services/loading.service';
     LoadingService,
     FilterItemsPipe,
     { provide: OverlayContainer, useClass: CustomOverlayContainer },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })
