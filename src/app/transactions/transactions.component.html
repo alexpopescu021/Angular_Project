@@ -8,15 +8,56 @@
   Download PDF
 </button>
 
-<table id="table" class="table" mat-table [dataSource]="TransactionsList">
-  <ng-container
-    *ngFor="let column of columns"
-    [matColumnDef]="column!.columnDef"
+<!-- Dropdown button for currencies -->
+<div class="dropdown" dropdown>
+  <a
+    aria-expanded="false"
+    aria-haspopup="true"
+    class="dropdown-toggle"
+    data-toggle="dropdown"
+    dropdownToggle
+    style="color: black; cursor: pointer"
+    id="currencyDropdown"
   >
-    <th mat-header-cell *matHeaderCellDef>{{ column!.header }}</th>
-    <td mat-cell *matCellDef="let row" [innerHTML]="column.cell(row)"></td>
-  </ng-container>
+    Supported Currencies
+  </a>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-</table>
+  <!-- Dropdown menu for filtering currencies -->
+  <div class="dropdown-menu" aria-labelledby="currencyDropdown">
+    <!-- List of currencies with checkboxes -->
+    <div class="currency-list">
+      <div *ngFor="let currency of availableCurrencies" class="dropdown-item">
+        <input
+          type="checkbox"
+          [value]="currency"
+          (change)="onCurrencyChange($event)"
+          [checked]="selectedCurrencies.includes(currency)"
+        />
+        {{ currency }}
+      </div>
+    </div>
+
+    <!-- Buttons for filter actions -->
+    <div class="filter-actions dropdown-item">
+      <button class="btn btn-primary" (click)="applyCurrencyFilter()">
+        FILTER
+      </button>
+      <button class="btn btn-secondary" (click)="clearFilter()">CANCEL</button>
+    </div>
+  </div>
+</div>
+
+<div>
+  <table id="table" class="table" mat-table [dataSource]="selectedCurrencies">
+    <ng-container
+      *ngFor="let column of columns"
+      [matColumnDef]="column!.columnDef"
+    >
+      <th mat-header-cell *matHeaderCellDef>{{ column!.header }}</th>
+      <td mat-cell *matCellDef="let row" [innerHTML]="column.cell(row)"></td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

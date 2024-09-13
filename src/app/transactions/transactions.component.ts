@@ -16,6 +16,8 @@ import { TransactionService } from '../services/transaction.service';
 export class TransactionsComponent implements OnInit {
   private ngUnsubscribe = new Subject<void>();
 
+  availableCurrencies: string[] = []; // List of available currencies to filter
+  selectedCurrencies: string[] = []; // Selected currencies for filtering
   TransactionsList: any = [];
   columns = [
     {
@@ -58,6 +60,34 @@ export class TransactionsComponent implements OnInit {
 
   ngOnInit() {
     this.loadTransactions();
+    this.populateAvailableCurrencies();
+  }
+
+  populateAvailableCurrencies() {
+    // Ensure the TransactionsList has valid data and map accordingly
+    const sourceCurrencies = this.TransactionsList.map(
+      (t: Transaction) => t.sourceCurrencyCode
+    );
+    console.log(this.TransactionsList);
+    const targetCurrencies = this.TransactionsList.map(
+      (t: Transaction) => t.targetCurrencyCode
+    );
+
+    // Combine source and target currencies and filter unique values
+    this.availableCurrencies = Array.from(
+      new Set([...sourceCurrencies, ...targetCurrencies])
+    );
+  }
+
+  // Apply the filter logic
+  applyCurrencyFilter() {
+    console.log('Filtering by currencies:', this.selectedCurrencies);
+    // Implement your actual filter logic here
+  }
+
+  // Clear the selected filters
+  clearFilter() {
+    this.selectedCurrencies = this.TransactionsList;
   }
 
   loadTransactions() {
@@ -67,7 +97,7 @@ export class TransactionsComponent implements OnInit {
       .subscribe(
         (data: {}) => {
           this.TransactionsList = data;
-          console.log(data);
+          this.selectedCurrencies = this.TransactionsList;
         },
         (error) => {
           console.error('Error:', error);
@@ -75,7 +105,18 @@ export class TransactionsComponent implements OnInit {
         }
       );
   }
-
+  onCurrencyChange(event: any) {
+    const currency = event.target.value;
+    if (event.target.checked) {
+      // Add the selected currency to the list
+      this.selectedCurrencies.push(currency);
+    } else {
+      // Remove the unselected currency from the list
+      this.selectedCurrencies = this.selectedCurrencies.filter(
+        (c) => c !== currency
+      );
+    }
+  }
   seedData() {
     this.TransactionsList = [
       {
