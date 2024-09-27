@@ -36,7 +36,6 @@ import { SupportedFiatComponent } from './supported-fiat/supported-fiat.componen
 import { TransactionsComponent } from './transactions/transactions.component';
 import { UserListComponent } from './user-list/user-list.component';
 
-import { OverlayContainer } from '@angular/cdk/overlay';
 import { CommonModule, DatePipe } from '@angular/common';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { MarketChartComponent } from './charts/market-chart/market-chart.component';
@@ -45,7 +44,6 @@ import { CoinDetailComponent } from './coin-detail/coin-detail.component';
 import { CoinListComponent } from './coin-list/coin-list.component';
 import { FooterComponent } from './footer/footer.component';
 import { LandingComponent } from './landing/landing.component';
-import { CustomOverlayContainer } from './pipes/filterItems/custom-overlay-container';
 import { LoadingService } from './services/loading.service';
 
 @NgModule({
@@ -102,7 +100,6 @@ import { LoadingService } from './services/loading.service';
     TransactionService,
     LoadingService,
     FilterItemsPipe,
-    { provide: OverlayContainer, useClass: CustomOverlayContainer },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],

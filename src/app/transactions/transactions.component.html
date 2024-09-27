@@ -9,7 +9,7 @@
 </button>
 
 <mat-form-field appearance="fill">
-  <mat-label>Filter by Currency</mat-label>
+  <mat-label style="color: white">Filter by Currency</mat-label>
   <mat-select (selectionChange)="applyCurrencyFilter($event.value)" multiple>
     <mat-option *ngFor="let currency of availableCurrencies" [value]="currency">
       {{ currency }}

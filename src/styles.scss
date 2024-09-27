@@ -1,3 +1,5 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 .chartContainer canvas {
   max-height: 250px;
   width: auto;
@@ -25,12 +27,10 @@
   background-color: green;
 }
 
-.cdk-overlay-container {
-  position: absolute;
-  z-index: 10000;
-  top: 50px;
-  right: 30px;
-}
+// .cdk-overlay-container {
+//   position: absolute;
+//   z-index: 10000;
+// }
 
 .mat-card {
   background: whitesmoke !important;

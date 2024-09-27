@@ -137,6 +137,10 @@ th {
   color: white;
 }
 
+::ng-deep .mat-table {
+  background-color: #1e1e2a !important;
+}
+
 tr:hover {
   background-color: #2d2e79;
   cursor: pointer;
